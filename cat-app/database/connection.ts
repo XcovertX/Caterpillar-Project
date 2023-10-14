@@ -2,10 +2,10 @@ import { Pool, Client } from 'pg';
 
 // Create a connection pool for better performance
 const pool = new Pool({
-  user: 'your_database_user',
-  host: 'your_database_host',
-  database: 'your_database_name',
-  password: 'your_database_password',
+  user: 'admin',
+  host: 'localhost',
+  database: 'postgres',
+  password: "4321",
   port: 5432, // Default PostgreSQL port
 });
 
