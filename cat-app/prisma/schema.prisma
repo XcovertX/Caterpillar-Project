@@ -1,0 +1,52 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model customers {
+  id              Int      @id @default(autoincrement())
+  firstname       String   @db.VarChar(255)
+  lastname        String   @db.VarChar(255)
+  shippingaddress String?
+  shippingcity    String?  @db.VarChar(255)
+  shippingcountry String?  @db.VarChar(255)
+  billingcity     String?  @db.VarChar(255)
+  billingaddress  String?
+  phone           String?  @db.VarChar(20)
+  email           String?  @unique @db.VarChar(255)
+  orders          orders[]
+}
+
+model orderitems {
+  orderitemid Int       @id @default(autoincrement())
+  orderid     Int?
+  productid   Int?
+  orders      orders?   @relation(fields: [orderid], references: [orderid], onDelete: NoAction, onUpdate: NoAction)
+  products    products? @relation(fields: [productid], references: [productid], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model orders {
+  orderid           Int          @id @default(autoincrement())
+  customerid        Int?
+  cardnumber        String?      @db.VarChar(16)
+  cardtype          String?      @db.VarChar(20)
+  trackingnumber    String?      @db.VarChar(50)
+  purchasedate      DateTime?    @db.Date
+  estimateddelivery DateTime?    @db.Date
+  itemamount        Decimal?     @db.Decimal(10, 2)
+  orderitems        orderitems[]
+  customers         customers?   @relation(fields: [customerid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model products {
+  productid        Int          @id @default(autoincrement())
+  itemname         String?      @db.VarChar(255)
+  priceperitem     Decimal?     @db.Decimal(10, 2)
+  shippedfrom      String?      @db.VarChar(255)
+  manufacturedfrom String?      @db.VarChar(255)
+  orderitems       orderitems[]
+}
