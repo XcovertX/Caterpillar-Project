@@ -1,38 +1,46 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import pool from '@/lib/db';
+import Connect from '@/lib/db';
 
 export async function GET(req: NextApiRequest, res: NextApiResponse) {
-  try {
-    pool.connect((err, client, done) => {
-      if (err) {
-        console.error('Error connecting to the database:', err);
-        return;
-      }
-    
-      // Catch for client not defined
-      if (!client) {
-        console.error('Client is undefined:', err);
-        return;
-      }
-    
-      // Example query: Select all customers
-      client.query('SELECT * FROM Customers', (err, result) => {
-        done(); // Release the client back to the pool
-    
+  let pool = Connect();
+  if (pool) {
+    try {
+      pool.connect((err: any, client, done: () => void) => {
         if (err) {
-          console.error('Error executing query:', err);
-          return;
+          console.error('Error connecting to the database:', err);
+          console.log("ddddddddddddddddddddddddddd")
+          return Response.json({ error: 'Error fetching data', status: 500 });;
         }
-    
-        // Process the query result here
-        console.log('All Customers:', result.rows);
-    
-        // Close the pool when done with the database connection
-        pool.end();
+        if (!client) {
+          console.error('Client is undefined:', err);
+          console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+          return Response.json({ error: 'Error fetching data', status: 500 });;
+        }
+      
+        // Example query: Select all customers
+        client.query('SELECT * FROM Customers', (err: any, result: { rows: any; }) => {
+          done(); // Release the client back to the pool
+      
+          if (err) {
+            console.error('Error executing query:', err);
+            console.log("ffffffffffffffffffffff")
+            return Response.json({ error: 'Error fetching data', status: 500 });;
+          }
+      
+          // Process the query result here
+          console.log('All Customers:', result.rows);
+      
+          // Close the pool when done with the database connection
+          pool?.end();
+          console.log("ggggggggggggggggggggggggg")
+          return Response
+        });
       });
-    });
-  } catch (error) {
-    console.error('Error fetching data:', error);
-    res.status(500).json({ error: 'Error fetching data' });
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      return Response.json({ error: 'Error fetching data', status: 500 });
+    }
+  } else {
+    return Response.json({ error: 'Error fetching data', status: 500 });
   }
 };
