@@ -43,7 +43,7 @@ function From({ placeholder, postId, isComment }: Props) {
     <div className="border-b-[1px] border-neutral-800 px-5 py-2">
       <div className="flex flex-row gap-4">
         <div>
-          <Avatar />
+          <Avatar  />
         </div>
         <div
           className={` ${isComment ? "w-full flex justify-between" : "w-full"}`}

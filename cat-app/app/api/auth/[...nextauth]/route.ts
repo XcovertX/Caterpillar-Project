@@ -18,17 +18,21 @@ export const handler = NextAuth({
           throw new Error('Invalid credentials');
         }
 
+      
+        console.log(credentials.email)
+        console.log(credentials.password)
         const user = await prisma.user.findFirst({
           where: {
             email: credentials.email
           }
         });
-
+        console.log(user)
         if (!user || !user?.password) {
           throw new Error('Invalid credentials');
         }
 
-        const isCorrectPassword = user.password === md5(credentials.password);
+        console.log(user.password)
+        const isCorrectPassword = user.password === credentials.password // md5(credentials.password);
 
         if (!isCorrectPassword) {
           throw new Error('Invalid credentials');
