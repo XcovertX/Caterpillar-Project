@@ -1,7 +1,12 @@
 import prisma from "@/app/lib/prismadb";
 import { NextResponse } from "next/server";
 
-export async function GET(request, { params }) {
+type Props = {
+  params: { userId: number }
+}
+
+// dynamic GET async handler for retrieving an existing user's information
+export async function GET(request: any, { params }: Props) {
 
   try {
     const user = await prisma.user.findUnique({
@@ -9,28 +14,17 @@ export async function GET(request, { params }) {
         id: params.userId,
       },
     });
-    const followersCount = await prisma.user.count({
-      where: {
-        following: {
-          has: params.userId,
-        },
-      },
-    });
 
-    const userWithFollowers = {
-      ...user,
-      followersCount,
-    };
+    console.log(`user: ${user}`);
 
-    console.log(`userWithFollowers ${userWithFollowers}`);
-
-    return NextResponse.json(userWithFollowers);
+    return NextResponse.json(user);
   } catch (error) {
     console.log(error);
   }
 }
 
-export async function PATCH(request, { params }) {
+// dynamic PATCH async handler for modifying existing user's information
+export async function PATCH(request: any, { params }: Props) {
   const body = await request.json();
 
   try {
@@ -39,16 +33,21 @@ export async function PATCH(request, { params }) {
         id: params.userId,
       },
       data: {
-        name: body.name,
-        username: body.username,
-        bio: body.bio,
-        profilePic: body.profilePic,
-        coverPic: body.coverPic,
+        firstname: body.firstname,
+        lastname: body.lastname,
+        shippingaddress: body.shippingaddress,
+        shippingcity: body.shippingcity,
+        shippingcountry: body.shippingcountry,
+        billingaddress: body.billingaddress,
+        billingcity: body.billingcity,
+        phone: body.phone,
+        email: body.email,
+        password: body.password
       },
     });
     console.log("user updated");
     return Response.json(updateUser, { status: 200 });
   } catch (error) {
-    return new NextResponse(400).end();
+    return NextResponse.json("error", { status: 500 });
   }
 }

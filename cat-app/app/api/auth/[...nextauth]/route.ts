@@ -18,7 +18,7 @@ export const handler = NextAuth({
           throw new Error('Invalid credentials');
         }
 
-        const user = await prisma.customers.findFirst({
+        const user = await prisma.user.findFirst({
           where: {
             email: credentials.email
           }

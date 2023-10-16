@@ -7,47 +7,50 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model customers {
-  id              Int      @id @default(autoincrement())
-  firstname       String   @db.VarChar(255)
-  lastname        String   @db.VarChar(255)
-  shippingaddress String?
-  shippingcity    String?  @db.VarChar(255)
-  shippingcountry String?  @db.VarChar(255)
-  billingcity     String?  @db.VarChar(255)
-  billingaddress  String?
-  phone           String?  @db.VarChar(20)
-  email           String?  @unique @db.VarChar(255)
-  password        String?
-  orders          orders[]
+model order {
+  orderid           Int         @id(map: "orders_pkey") @default(autoincrement())
+  customerid        Int?
+  cardnumber        String?     @db.VarChar(16)
+  cardtype          String?     @db.VarChar(20)
+  trackingnumber    String?     @db.VarChar(50)
+  purchasedate      DateTime?   @db.Date
+  estimateddelivery DateTime?   @db.Date
+  itemamount        Decimal?    @db.Decimal(10, 2)
+  createddate       DateTime?   @db.Date
+  user              user?       @relation(fields: [customerid], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "orders_customerid_fkey")
+  orderitem         orderitem[]
 }
 
-model orderitems {
-  orderitemid Int       @id @default(autoincrement())
+model orderitem {
+  orderitemid Int      @id(map: "orderitems_pkey") @default(autoincrement())
   orderid     Int?
   productid   Int?
-  orders      orders?   @relation(fields: [orderid], references: [orderid], onDelete: NoAction, onUpdate: NoAction)
-  products    products? @relation(fields: [productid], references: [productid], onDelete: NoAction, onUpdate: NoAction)
+  order       order?   @relation(fields: [orderid], references: [orderid], onDelete: NoAction, onUpdate: NoAction, map: "orderitems_orderid_fkey")
+  product     product? @relation(fields: [productid], references: [productid], onDelete: NoAction, onUpdate: NoAction, map: "orderitems_productid_fkey")
 }
 
-model orders {
-  orderid           Int          @id @default(autoincrement())
-  customerid        Int?
-  cardnumber        String?      @db.VarChar(16)
-  cardtype          String?      @db.VarChar(20)
-  trackingnumber    String?      @db.VarChar(50)
-  purchasedate      DateTime?    @db.Date
-  estimateddelivery DateTime?    @db.Date
-  itemamount        Decimal?     @db.Decimal(10, 2)
-  orderitems        orderitems[]
-  customers         customers?   @relation(fields: [customerid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+model product {
+  productid        Int         @id(map: "products_pkey") @default(autoincrement())
+  itemname         String?     @db.VarChar(255)
+  priceperitem     Decimal?    @db.Decimal(10, 2)
+  shippedfrom      String?     @db.VarChar(255)
+  manufacturedfrom String?     @db.VarChar(255)
+  orderitem        orderitem[]
 }
 
-model products {
-  productid        Int          @id @default(autoincrement())
-  itemname         String?      @db.VarChar(255)
-  priceperitem     Decimal?     @db.Decimal(10, 2)
-  shippedfrom      String?      @db.VarChar(255)
-  manufacturedfrom String?      @db.VarChar(255)
-  orderitems       orderitems[]
+model user {
+  id              Int       @id(map: "customers_pkey") @default(autoincrement())
+  firstname       String    @db.VarChar(255)
+  lastname        String    @db.VarChar(255)
+  shippingaddress String?
+  shippingcity    String?   @db.VarChar(255)
+  shippingcountry String?   @db.VarChar(255)
+  billingcity     String?   @db.VarChar(255)
+  billingaddress  String?
+  phone           String?   @db.VarChar(20)
+  email           String?   @unique(map: "customers_email_key") @db.VarChar(255)
+  password        String?
+  createddate     DateTime? @db.Date
+  updateddate     DateTime? @db.Date
+  order           order[]
 }
