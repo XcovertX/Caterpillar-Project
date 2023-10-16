@@ -2,12 +2,12 @@
 
 type Props = {
     label: string,
-    secondary: boolean,
-    fullWidth: boolean,
+    secondary?: boolean,
+    fullWidth?: boolean,
     onClick: any,
     disabled: boolean,
-    outline: boolean,
-    large: boolean
+    outline?: boolean,
+    large?: boolean
 }
 
 const Button = ({

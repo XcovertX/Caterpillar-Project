@@ -84,12 +84,12 @@ function Register() {
   const footerContent = (
     <div className="text-neutral-400 text-center mt-4">
       <p>
-        Already have an Account
+        Already have an Account?
         <span
           onClick={onToggle}
-          className="text-white cursor-pointer hover:underline"
+          className="text-white cursor-pointer hover:underline ml-2"
         >
-          Sing In
+          Sign In
         </span>
       </p>
     </div>

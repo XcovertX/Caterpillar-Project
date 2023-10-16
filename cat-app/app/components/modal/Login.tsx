@@ -59,9 +59,9 @@ const onSubmit = useCallback(async () => {
   );
   const footerContent = (
     <div className="text-neutral-400 text-center mt-4">
-      <p>Do not  have an Account
+      <p>Don't have an Account?
         
-        <span onClick={onToggle}  className="text-white cursor-pointer hover:underline">
+        <span onClick={onToggle}  className="text-white cursor-pointer hover:underline ml-2">
            Register
         </span>
       </p>
@@ -71,7 +71,7 @@ const onSubmit = useCallback(async () => {
   return (
     <Modal
       disabled={""}
-      title="LonIn your Account"
+      title="Log in to your Account"
       actionLabel="Login"
       isOpen={useLoginModal.isOpen}
       onClose={useLoginModal.onClose}

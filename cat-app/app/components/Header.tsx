@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
-// import { BiArrowBack } from "react-icons/bi";
+import { BiArrowBack } from "react-icons/bi";
 
 type Props = {
     showBackArrow: boolean,
@@ -17,10 +17,10 @@ function Header({ showBackArrow, label }: Props) {
     <div className="border-b-[1px] border-neutral-800 p-5">
       <div className="flex flex-row items-center gap-2">
         {showBackArrow && (
-          <button
+          <BiArrowBack
             onClick={handleBack}
             color="white"
-            // size={20}
+            size={20}
             className="cursor-pointer hover:opacity-70 transition"
           />
         )}
