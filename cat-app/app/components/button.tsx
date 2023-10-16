@@ -1,7 +1,7 @@
 "use client";
 
 type Props = {
-    label: boolean,
+    label: string,
     secondary: boolean,
     fullWidth: boolean,
     onClick: any,

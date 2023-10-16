@@ -1,6 +1,6 @@
 "use client";
 import { useCallback } from "react";
-import { AiOutlineClose } from "react-icons/ai";
+// import { AiOutlineClose } from "react-icons/ai";
 import Button from "../Button";
 function Modal({ isOpen, onClose, onSubmit, title, body, actionLabel, footer, disabled }) {
   const handleClose = useCallback(() => {
@@ -79,7 +79,7 @@ function Modal({ isOpen, onClose, onSubmit, title, body, actionLabel, footer, di
               "
               onClick={handleClose}
             >
-              <AiOutlineClose size={20} />
+              {/* <AiOutlineClose size={20} /> */}
             </button>
           </div>
           {/*body*/}

@@ -18,6 +18,7 @@ model customers {
   billingaddress  String?
   phone           String?  @db.VarChar(20)
   email           String?  @unique @db.VarChar(255)
+  password        String?
   orders          orders[]
 }
 
