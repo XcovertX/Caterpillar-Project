@@ -6,11 +6,11 @@ import { useCallback, useState } from "react";
 import { toast } from "react-hot-toast";
 import Input from "../Input";
 import Modal from "./Modal";
+import Phone from "../Phone";
 
 function Register() {
   const [email, setEmail]             = useState("");
   const [password, setPassword]       = useState("");
-  const [username, setUsername]       = useState("");
   const [fisrtname, setFirstName]     = useState("");
   const [lastname, setLastName]       = useState("");
   const [shipAdress, setShipAddress]  = useState("");
@@ -22,7 +22,7 @@ function Register() {
   const [billState, setBillState]     = useState("");
   const [billCountry, setBillCountry] = useState("");
   const [cardType, setCardType]       = useState("");
-  const [cardNumber, setCardNumber]   = useState(0);
+  const [cardNumber, setCardNumber]   = useState('');
   const [phoneNumber, setPhoneNumber] = useState(0);
   const [isLoading, setIsLoading]     = useState(false);
   const useRegisterModal              = useRegister();
@@ -42,7 +42,8 @@ function Register() {
         body: JSON.stringify({
           email,
           password,
-          name
+          fisrtname,
+          lastname
         }),
       });
       if (!response.ok) {
@@ -61,31 +62,49 @@ function Register() {
       console.error(error);
       // Handle the error here, show error message, etc.
     }
-  }, useRegisterModal, email, password, name, username);
+  }, [
+    useRegisterModal, 
+    email, 
+    password, 
+    fisrtname, 
+    lastname,
+    shipAdress,
+    shipCity,
+    shipCountry,
+    shipState,
+    billAdress,
+    billCity,
+    billCountry,
+    billState,
+    phoneNumber,
+    cardNumber,
+    cardType
+    ]
+  );
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
+      <div className='flex flex-row gap-4'>
+        <Input
+          disabled={isLoading}
+          placeholder="Fisrt Name"
+          type="text"
+          value={fisrtname}
+          onChange={(e:any) => setFirstName(e.target.value)}
+        />      
+        <Input
+          disabled={isLoading}
+          placeholder="Last Name"
+          type="text"
+          value={lastname}
+          onChange={(e:any) => setLastName(e.target.value)}
+        />
+      </div>
 
-      <Input
-        disabled={isLoading}
-        placeholder="Fisrt Name"
+      <Phone
         type="text"
-        value={fisrtname}
-        onChange={(e:any) => setFirstName(e.target.value)}
-      />      
-      <Input
-        disabled={isLoading}
-        placeholder="Last Name"
-        type="text"
-        value={lastname}
-        onChange={(e:any) => setLastName(e.target.value)}
-      />
-      <Input
-        disabled={isLoading}
-        placeholder="Phone"
-        type="number"
         value={phoneNumber}
-        onChange={(e:any) => setPhoneNumber(e.target.value)}
+        onChange={setPhoneNumber}
       />
       <Input
         disabled={isLoading}

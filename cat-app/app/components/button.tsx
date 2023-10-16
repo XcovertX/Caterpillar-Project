@@ -5,7 +5,7 @@ type Props = {
     secondary?: boolean,
     fullWidth?: boolean,
     onClick: any,
-    disabled: boolean,
+    disabled?: boolean,
     outline?: boolean,
     large?: boolean
 }

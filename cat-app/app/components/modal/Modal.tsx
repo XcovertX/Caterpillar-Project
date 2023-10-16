@@ -8,7 +8,7 @@ type Props = {
   onClose: any;
   onSubmit: any;
   title: string;
-  body: string;
+  body: JSX.Element;
   actionLabel: string;
   footer: JSX.Element;
   disabled: boolean;

@@ -1,4 +1,4 @@
-import { HTMLInputTypeAttribute } from "react";
+import { HTMLInputTypeAttribute, useEffect, useState } from "react";
 
 type Props = {
     placeholder: string,
@@ -9,7 +9,8 @@ type Props = {
 }
 
 function Input({ placeholder, value, onChange, disabled, type }: Props) {
-    return (
+ 
+  return (
       <div className="w-full">
         <input
           disabled={disabled}

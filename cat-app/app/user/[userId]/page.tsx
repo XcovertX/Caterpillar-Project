@@ -4,6 +4,7 @@ import UserHero from "@/app/components/UserHero";
 import current from "@/app/actions/CurrentUser";
 import Edit from "@/app/components/modal/Edit";
 import { Toaster } from "react-hot-toast";
+import { signOut } from "next-auth/react";
 
 type Props = {
     params: {
@@ -24,6 +25,8 @@ async function page({ params: { userId } }: Props) {
       <Header showBackArrow label={user?.name} />
 
       <div className="h-screen overflow-scroll-none">
+        
+      <button onClick={() => signOut()}>Logout</button>
         {/* userhero */}
         <UserHero
           userId={user?.id}

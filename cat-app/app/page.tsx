@@ -6,7 +6,8 @@ import Header from "./components/Header";
 import Login from "./components/modal/Login";
 import Register from "./components/modal/Register";
 import Form from "./components/post/Form";
-import PostFeed from "./components/post/PostFeed";
+import Logout from "./components/Logout";
+
 
 export default async function Home() {
   const session = await getServerSession(handler);
@@ -17,10 +18,9 @@ export default async function Home() {
       <Login />
       {session ? "" : <Register />}
       <Header label="Home" showBackArrow/>
+      <Logout />
       <div className="h-screen overflow-scroll scrollbar-none">
         <Form placeholder="what's your mind...?" />
-        {/* postfeed */}
-        {/* <PostFeed userId={currentUser? currentUser.id : ""} currentUser={currentUser} /> */}
       </div>
     </>
   );
