@@ -7,11 +7,12 @@ type Props = {
     type: HTMLInputTypeAttribute
 }
 
+// Phone component for taking user input for phone numbers
 function Phone({ value, onChange }: Props) {
-    const [phone, setPhone]     = useState('');
     
     // function for styling the phone number to: (xxx) xxx - xxxx
     const handleValChange = (val:string) => {
+        
     let uTempVal = val.replace(/[^\d.]/g, '');
     uTempVal = uTempVal.replace(/\s/g, '');
     uTempVal = uTempVal.replace(/\-/g, '');
@@ -37,16 +38,15 @@ function Phone({ value, onChange }: Props) {
         };
     };
 
-    setPhone(dTempVal);
+    onChange(dTempVal);
   };
 
-  
   return (
     <Input 
       type="tel" 
       disabled={false} 
       onChange={(e:any) => handleValChange(e.target.value)} 
-      value={phone} 
+      value={value} 
       placeholder="Phone Number" 
     />
     );

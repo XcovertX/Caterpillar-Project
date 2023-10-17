@@ -1,6 +1,6 @@
 "use client";
 import { useCallback } from "react";
-// import { AiOutlineClose } from "react-icons/ai";
+import { AiOutlineClose } from "react-icons/ai";
 import Button from "../Button";
 
 type Props = {
@@ -73,7 +73,9 @@ function Modal({ isOpen, onClose, onSubmit, title, body, actionLabel, footer, di
             flex 
             items-center 
             justify-between 
-            p-10 
+            px-10
+            pt-10
+            mx-2
             rounded-t
             "
           >
@@ -85,13 +87,13 @@ function Modal({ isOpen, onClose, onSubmit, title, body, actionLabel, footer, di
                 p-1 
                 ml-auto
                 border-0 
-                text-white 
-                hover:opacity-70
+                text-white
+                hover:text-sky-500
                 transition
               "
               onClick={handleClose}
             >
-              {/* <AiOutlineClose size={20} /> */}
+              <AiOutlineClose size={20} />
             </button>
           </div>
           {/*body*/}
@@ -99,7 +101,7 @@ function Modal({ isOpen, onClose, onSubmit, title, body, actionLabel, footer, di
             {body}
           </div>
           {/*footer*/}
-          <div className="flex flex-col gap-2 p-10">
+          <div className="flex flex-col gap-2 px-10 pb-10">
             <Button disabled={disabled} label={actionLabel} secondary fullWidth large onClick={handleSubmit} />
             {footer}
           </div>

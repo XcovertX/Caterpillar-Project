@@ -7,13 +7,16 @@ import { toast } from "react-hot-toast";
 import Input from "../Input";
 import Modal from "./Modal";
 import Phone from "../Phone";
+import Address from "../Address";
+import Card from "../Card";
+import Seperator from "../Seperator";
 
 function Register() {
   const [email, setEmail]             = useState("");
   const [password, setPassword]       = useState("");
-  const [fisrtname, setFirstName]     = useState("");
+  const [firstname, setFirstName]     = useState("");
   const [lastname, setLastName]       = useState("");
-  const [shipAdress, setShipAddress]  = useState("");
+  const [shipAddress, setShipAddress]  = useState("");
   const [shipCity, setShipCity]       = useState("");
   const [shipState, setShipState]     = useState("");
   const [shipCountry, setShipCountry] = useState("");
@@ -23,7 +26,7 @@ function Register() {
   const [billCountry, setBillCountry] = useState("");
   const [cardType, setCardType]       = useState("");
   const [cardNumber, setCardNumber]   = useState('');
-  const [phoneNumber, setPhoneNumber] = useState(0);
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [isLoading, setIsLoading]     = useState(false);
   const useRegisterModal              = useRegister();
   const useLoginModal                 = useLogin();
@@ -42,8 +45,19 @@ function Register() {
         body: JSON.stringify({
           email,
           password,
-          fisrtname,
-          lastname
+          firstname,
+          lastname,
+          phoneNumber,
+          shipAddress,
+          shipCity,
+          shipCountry,
+          shipState,
+          billAdress,
+          billCity,
+          billCountry,
+          billState, 
+          cardNumber,
+          cardType
         }),
       });
       if (!response.ok) {
@@ -66,9 +80,9 @@ function Register() {
     useRegisterModal, 
     email, 
     password, 
-    fisrtname, 
+    firstname, 
     lastname,
-    shipAdress,
+    shipAddress,
     shipCity,
     shipCountry,
     shipState,
@@ -83,13 +97,14 @@ function Register() {
   );
 
   const bodyContent = (
-    <div className="flex flex-col gap-4">
-      <div className='flex flex-row gap-4'>
+    <div className="flex flex-col gap-2">
+      <Seperator label="personal information" color="border-neutral-500/[.7]" />
+      <div className='flex flex-row gap-2'>
         <Input
           disabled={isLoading}
           placeholder="Fisrt Name"
           type="text"
-          value={fisrtname}
+          value={firstname}
           onChange={(e:any) => setFirstName(e.target.value)}
         />      
         <Input
@@ -100,7 +115,6 @@ function Register() {
           onChange={(e:any) => setLastName(e.target.value)}
         />
       </div>
-
       <Phone
         type="text"
         value={phoneNumber}
@@ -113,24 +127,43 @@ function Register() {
         value={email}
         onChange={(e:any) => setEmail(e.target.value)}
       />
-      {/* <Input
-        disabled={isLoading}
-        placeholder="Name"
-        value={name}
-        onChange={(e:any) => setName(e.target.value)}
-      />
-      <Input
-        disabled={isLoading}
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      /> */}
+      <Seperator label="shipping address" color="border-neutral-500/[.7]" />
+      <Address 
+        address={shipAddress}
+        city={shipCity}
+        state={shipState}
+        country={shipCountry}
+        setAddress={setShipAddress}
+        setCity={setShipCity}
+        setCountry={setShipCountry}
+        setState={setShipState}
+        addressType="Shipping"
+       />
+       <Seperator label="billing address" color="border-neutral-500/[.7]" />
+      <Address 
+        address={billAdress}
+        city={billCity}
+        state={billState}
+        country={billCountry}
+        setAddress={setBillAddress}
+        setCity={setBillCity}
+        setCountry={setBillCountry}
+        setState={setBillState}
+        addressType="Billing"
+       />
+       <Seperator label="card information" color="border-neutral-500/[.7]" />
+      <Card 
+        cardNumber={cardNumber}
+        cardType={cardType}
+        setNumber={setCardNumber}
+        setType={setCardType}/>
+        <Seperator label="password" color="border-neutral-500/[.7]" />
       <Input
         disabled={isLoading}
         placeholder="Password"
         type="password"
         value={password}
-        onChange={(e) => setPassword(e.target.value)}
+        onChange={(e:any) => setPassword(e.target.value)}
       />
     </div>
   );
@@ -140,7 +173,7 @@ function Register() {
         Already have an Account?
         <span
           onClick={onToggle}
-          className="text-white cursor-pointer hover:underline ml-2"
+          className="text-white cursor-pointer hover:text-sky-500 hover:underline ml-2"
         >
           Sign In
         </span>

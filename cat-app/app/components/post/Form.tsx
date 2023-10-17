@@ -49,7 +49,7 @@ function From({ placeholder, postId, isComment }: Props) {
           className={` ${isComment ? "w-full flex justify-between" : "w-full"}`}
         >
           <textarea
-            className="disabled:opacity-80 peer resize-none mt-3 w-full bg-black ring-0 outline-none text-[20px] placeholder-neutral-500 text-white"
+            className="disabled:opacity-80 peer resize-none mt-3 w-full bg-black ring-0 outline-none text-[20px] placeholder-neutral-500/[.5] text-white"
             placeholder={placeholder}
             disabled={isLoading}
             value={body}

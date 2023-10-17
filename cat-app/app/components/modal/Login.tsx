@@ -61,7 +61,7 @@ const onSubmit = useCallback(async () => {
     <div className="text-neutral-400 text-center mt-4">
       <p>Don't have an Account?
         
-        <span onClick={onToggle}  className="text-white cursor-pointer hover:underline ml-2">
+        <span onClick={onToggle}  className="text-white hover:text-sky-500 cursor-pointer hover:underline ml-2">
            Register
         </span>
       </p>

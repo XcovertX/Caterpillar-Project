@@ -19,9 +19,10 @@ function Input({ placeholder, value, onChange, disabled, type }: Props) {
           placeholder={placeholder}
           type={type}
           className="
-          w-full p-4 
-          text-lg bg-black
+          w-full px-2 py-1
+          text-md bg-black
           border-2 border-neutral-800
+          placeholder-neutral-500/[.7]
           outline-none
           rounded-md
           text-white

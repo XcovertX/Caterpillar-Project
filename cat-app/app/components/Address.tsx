@@ -24,14 +24,14 @@ const Address = ({ address,
                    setState }: Props) => {
   
   return(
-    <div className="h-full flex flex-col">
+    <div className="h-full flex flex-col gap-2">
       <Input
         type="text"
         disabled={false}
         placeholder={addressType + ' Street Address'}
         onChange={(e:any) =>setAddress(e.target.value)}
         value={address} />
-      <div className="flex flex-row gap-4">
+      <div className="flex flex-row gap-2">
         <Input
           type="text"
           disabled={false}
