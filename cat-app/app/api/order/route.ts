@@ -1,22 +1,31 @@
 import current from "@/app/actions/CurrentUser";
 import prisma from "@/app/lib/prismadb";
 import { NextResponse } from "next/server";
+import { replacer, reviver } from "@/app/lib/utils";
 
 // GET async handler for retrieving all orders in the app
 // ordering them from newest to oldest
 export async function GET() {
+  const currentUser = await current();
+  
   try {
     const orders = await prisma.order.findMany({
+      where: {
+        customer_id: currentUser?.id
+      },
       orderBy: {
-        createddate: "desc",
+        purchase_date: "desc",
       },
       include: {
-        orderitem: true,
+        product: true,
+        address:true
       },
     });
-    return NextResponse.json(orders);
+    console.log(orders)
+    const ordersString = JSON.stringify(orders, replacer) // handler for BigInt data type stringify serielization
+    return NextResponse.json(ordersString);
   } catch (error) {
-    console.error("Error getting posts");
+    console.error("ERROR: failed to retrieve orders", error);
     return new NextResponse("Internal error: ", { status: 500 });
   }
 }
@@ -32,8 +41,8 @@ export async function POST(request: any) {
     }
     const order = await prisma.order.create({
       data: {
-        body,
-        userId: CurrentUser.id,
+        
+        customer_id: CurrentUser.id,
       },
     });
     console.log("order created");

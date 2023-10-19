@@ -25,6 +25,7 @@ export async function GET(request: any, { params }: Props) {
         },
 
       });
+      
       return NextResponse.json(order);
     } else {
       const order = await prisma.order.findMany({

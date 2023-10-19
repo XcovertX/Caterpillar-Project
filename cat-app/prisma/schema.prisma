@@ -37,9 +37,10 @@ model order {
   shipped_from_address_id BigInt
   purchase_date           DateTime @db.Date
   estimated_delivery_date DateTime @db.Date
-  product_id              BigInt   @unique
+  product_id              BigInt
   quantity                Int
   customer_id             BigInt
+  total                   Decimal? @db.Decimal(10, 2)
   customer                customer @relation(fields: [customer_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   product                 product  @relation(fields: [product_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   address                 address  @relation(fields: [shipped_from_address_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
@@ -74,6 +75,6 @@ model product {
   product_name String    @db.VarChar(50)
   price        Decimal   @db.Decimal(10, 2)
   inventory_id BigInt
-  order        order?
+  order        order[]
   inventory    inventory @relation(fields: [inventory_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "product_inventory_id")
 }

@@ -1,20 +1,24 @@
 import { getServerSession } from "next-auth";
-import Logout from "../components/Logout";
 import { redirect } from "next/navigation";
-
+import getOrders from "../actions/GetOrders";
+import { reviver } from "../lib/utils";
+import PurchaseHistory from "../components/PurchaseHistory";
 
 export default async function Page() {
-  const session = await getServerSession()
+  const session = await getServerSession();
+  let orders    = await getOrders();
+  orders        = JSON.parse(orders, reviver);
   return (
     <div>
+      
       {session? 
       <>
         <h1>Customer Data</h1>
-        {session?.user.email}
+        <PurchaseHistory orders={orders} />
       </>
       : redirect('/')}
       
-      <Logout />
+      
     </div>
   );
 }

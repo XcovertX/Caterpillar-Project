@@ -6,7 +6,6 @@ import Header from "./components/Header";
 import Login from "./components/modal/Login";
 import Register from "./components/modal/Register";
 import Logout from "./components/Logout";
-import { GET } from "./api/order/route"
 import UserHero from "./components/UserHero";
 import { redirect } from "next/navigation";
 

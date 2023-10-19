@@ -1,3 +1,5 @@
+import Logout from "../components/Logout"
+
 export default function Layout({
     children,
 } : {
@@ -5,8 +7,12 @@ export default function Layout({
 }) {
     return (
         <section>
-            <nav></nav>
-            {children}
+            <nav className="flex flex-row justify-end bg-red-300 p-2">
+                <Logout />
+            </nav>
+            <div className="p-5">
+                {children}
+            </div>
         </section>
     )
 }

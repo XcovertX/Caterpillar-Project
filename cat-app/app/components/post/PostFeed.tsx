@@ -1,4 +1,4 @@
-import getPosts from "@/app/actions/GetPosts"
+import getPosts from "@/app/actions/GetOrders"
 import PostItems from "./PostItems"
 
 type Props = {
