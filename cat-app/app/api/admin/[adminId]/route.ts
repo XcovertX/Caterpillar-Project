@@ -14,9 +14,6 @@ export async function GET(request: any, { params }: Props) {
         id: params.userId,
       },
     });
-
-    console.log(`user: ${user}`);
-
     return NextResponse.json(user);
   } catch (error) {
     console.log(error);

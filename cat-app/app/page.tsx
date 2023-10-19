@@ -22,7 +22,7 @@ export default async function Home() {
           <Header label="Home" showBackArrow/>
           <Logout />
           <div>
-            {currentUser? redirect('/home') : '...loading...'}
+            {currentUser? redirect('/purchase-history') : '...loading...'}
           </div>
         </>
         : 

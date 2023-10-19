@@ -40,7 +40,7 @@ model order {
   product_id              BigInt
   quantity                Int
   customer_id             BigInt
-  total                   Decimal? @db.Decimal(10, 2)
+  total                   Decimal  @db.Decimal(10, 2)
   customer                customer @relation(fields: [customer_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   product                 product  @relation(fields: [product_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   address                 address  @relation(fields: [shipped_from_address_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
@@ -53,6 +53,7 @@ model customer {
   contact_information_id BigInt              @unique
   card_id                BigInt              @unique
   password               String              @db.VarChar(255)
+  created_date           DateTime            @db.Date
   card_information       card_information    @relation(fields: [card_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   contact_information    contact_information @relation(fields: [contact_information_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   order                  order[]

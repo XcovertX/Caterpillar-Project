@@ -1,4 +1,5 @@
 import prisma from "@/app/lib/prismadb";
+import { replacer } from "@/app/lib/utils";
 import { NextResponse } from "next/server";
 
 type Props = {
@@ -23,10 +24,9 @@ export async function GET(request: any, { params }: Props) {
         where: {
           id: params.orderId,
         },
-
       });
-      
-      return NextResponse.json(order);
+      const orderString = JSON.stringify(order, replacer) // handler for BigInt data type stringify serielization
+      return NextResponse.json(orderString);
     } else {
       const order = await prisma.order.findMany({
         where: {
@@ -36,8 +36,8 @@ export async function GET(request: any, { params }: Props) {
           customer: true,
         },
       });
-      console.log("SUCCESS: ", order)
-      return NextResponse.json(order);
+      const orderString = JSON.stringify(order, replacer) // handler for BigInt data type stringify serielization
+      return NextResponse.json(orderString);
     }
   } catch (error) {
     console.error(error)

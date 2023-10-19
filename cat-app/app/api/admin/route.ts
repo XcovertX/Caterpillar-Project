@@ -5,9 +5,9 @@ import { NextResponse } from "next/server";
 // ordering them from newest to oldest
 export async function GET() {
   try {
-    const users = await prisma.user.findMany({
+    const users = await prisma.customer.findMany({
       orderBy: {
-        createddate: "desc",
+        created_date: "desc",
       },
     });
     return NextResponse.json(users);

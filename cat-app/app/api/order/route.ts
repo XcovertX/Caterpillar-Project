@@ -21,7 +21,6 @@ export async function GET() {
         address:true
       },
     });
-    console.log(orders)
     const ordersString = JSON.stringify(orders, replacer) // handler for BigInt data type stringify serielization
     return NextResponse.json(ordersString);
   } catch (error) {
