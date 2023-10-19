@@ -6,7 +6,7 @@ import Edit from "@/app/components/modal/Edit";
 import { Toaster } from "react-hot-toast";
 type Props = {
     params: {
-        userId: string
+        userId: bigint
     }
 }
 
@@ -26,11 +26,9 @@ async function page({ params: { userId } }: Props) {
         
         {/* userhero */}
         <UserHero
-          userId={user?.id}
-          coverPic={user?.coverPic}
-          profilePic={user?.profilePic}
+          purchaseHistory={[]}
         />
-        <Edit user={user} />
+        {/* <Edit user={user} /> */}
       </div>
     </>
   );

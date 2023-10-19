@@ -16,7 +16,7 @@ function Register() {
   const [password, setPassword]       = useState("");
   const [firstname, setFirstName]     = useState("");
   const [lastname, setLastName]       = useState("");
-  const [shipAddress, setShipAddress]  = useState("");
+  const [shipAddress, setShipAddress] = useState("");
   const [shipCity, setShipCity]       = useState("");
   const [shipState, setShipState]     = useState("");
   const [shipCountry, setShipCountry] = useState("");
@@ -25,11 +25,11 @@ function Register() {
   const [billState, setBillState]     = useState("");
   const [billCountry, setBillCountry] = useState("");
   const [cardType, setCardType]       = useState("");
-  const [cardNumber, setCardNumber]   = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [cardNumber, setCardNumber]   = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [isLoading, setIsLoading]     = useState(false);
-  const useRegisterModal              = useRegister();
-  const useLoginModal                 = useLogin();
+  const useRegisterModal:any          = useRegister();
+  const useLoginModal:any             = useLogin();
 
   const onToggle = useCallback(() => {
     useRegisterModal.onClose();
@@ -70,10 +70,8 @@ function Register() {
         password,
       });
       useRegisterModal.onClose();
-      console.log("Account error:");
     } catch (error) {
-      console.log("Account error:");
-      console.error(error);
+      console.error("Account error: ", error);
       // Handle the error here, show error message, etc.
     }
   }, [

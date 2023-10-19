@@ -8,7 +8,7 @@ declare module "next-auth" {
 
   interface Session {
     user: {
-      /** The user's postal address. */
+      // The user's postal address
       address: string
     } & DefaultSession["user"]
     accessToken?: string
@@ -16,6 +16,11 @@ declare module "next-auth" {
   }
   interface User {
     id: number;
+    contact_information: { email: string }
+    data: {
+      email: string;
+      userType: string;
+    } & DefaultUser['user']
   }
 
   // interface Account {}
@@ -24,9 +29,10 @@ declare module "next-auth" {
 }
 
 declare module "next-auth/jwt" {
-    /** Returned by the `jwt` callback and `getToken`, when using JWT sessions */
+    // Returned by the `jwt` callback and `getToken`, when using JWT sessions
     interface JWT {
-      /** OpenID ID Token */
+      // OpenID ID Token
+      customerId:   number
       idToken?:     string
       provider?:    string
       accessToken?: string

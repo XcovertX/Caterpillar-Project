@@ -8,7 +8,7 @@ export async function POST(request: any) {
     email,
     firstname, 
     lastname,
-    shipAddress,
+    shippingaddress,
     shipCity,
     shipCountry,
     shipState,
@@ -20,13 +20,13 @@ export async function POST(request: any) {
     cardNumber,
     cardType,
     password,  } = await request.json();
-  const user = await prisma.user.create({
+  const user = await prisma.customer.create({
     data: {
       email, 
       password, 
       firstname, 
       lastname,
-      shipAddress,
+      shippingaddress,
       shipCity,
       shipCountry,
       shipState,
@@ -36,7 +36,7 @@ export async function POST(request: any) {
       billState,
       phoneNumber,
       cardNumber,
-      cardType
+      cardType,
       password: md5(password),
 
     },

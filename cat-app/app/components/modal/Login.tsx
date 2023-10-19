@@ -7,13 +7,12 @@ import Input from "../Input";
 import Modal from "./Modal";
 
 function Login() {
-  const [email, setEmail] = useState();
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
- 
   const [isLoading, setIsLoading] = useState(false);
 
-const useRegisterModal = useRegister()
-const useLoginModal = useLogin()
+const useRegisterModal:any = useRegister()
+const useLoginModal:any    = useLogin()
 
 
 const onToggle = useCallback(() => {
@@ -23,37 +22,35 @@ const onToggle = useCallback(() => {
 const onSubmit = useCallback(async () => {
   try {
     setIsLoading(true);
-    await signIn("credentials", {
+    const user = await signIn("credentials", {
       email,
       password,
     });
      
     setIsLoading(false);
     useLoginModal.onClose();
-    console.log("Account error:");
+
   } catch (error) {
-    console.log("Account error:");
-    console.error(error);
-    // Handle the error here, show error message, etc.
+    console.error("Account error: ", error);
   }
 }, [useLoginModal, email, password]);
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
       <Input
-       disabled={isLoading}
+        disabled={isLoading}
         placeholder="Email Address"
+        type="text" 
         value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        onChange={(e:any) => setEmail(e.target.value)}
       />
        
-      
       <Input 
         disabled={isLoading}
         placeholder="Password" 
         type="password" 
         value={password} 
-        onChange={(e) => setPassword(e.target.value)}
+        onChange={(e:any) => setPassword(e.target.value)}
       />
     </div>
   );
@@ -70,7 +67,7 @@ const onSubmit = useCallback(async () => {
   )
   return (
     <Modal
-      disabled={""}
+      disabled={false}
       title="Log in to your Account"
       actionLabel="Login"
       isOpen={useLoginModal.isOpen}

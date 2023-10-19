@@ -5,20 +5,29 @@ import { handler } from "../api/auth/[...nextauth]/route";
 const current = async () => {
 
   try {
-    const session = await getServerSession(handler);
+    const session = await getServerSession();
 
     if (!session?.user?.email) {
+      console.log("no session -> user -> email")
+      console.log(session)
       return null;
     }
 
-    const currentUser = await prisma.user.findUnique({
+    const currentUser = await prisma.customer.findFirst({
+
       where: {
-        email: session.user.email 
+        contact_information: {
+          email: session?.user.email
+        } 
+      },
+      include: {
+        contact_information: true
       }
     });
 
     return currentUser;
   } catch (error) {
+    console.error("CurrentUser Error: ", error)
     return null;
   }
 };

@@ -7,50 +7,73 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model order {
-  orderid           Int         @id(map: "orders_pkey") @default(autoincrement())
-  customerid        Int?
-  cardnumber        String?     @db.VarChar(16)
-  cardtype          String?     @db.VarChar(20)
-  trackingnumber    String?     @db.VarChar(50)
-  purchasedate      DateTime?   @db.Date
-  estimateddelivery DateTime?   @db.Date
-  itemamount        Decimal?    @db.Decimal(10, 2)
-  createddate       DateTime?   @db.Date
-  user              user?       @relation(fields: [customerid], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "orders_customerid_fkey")
-  orderitem         orderitem[]
+model address {
+  id                                                                   BigInt                @id @default(autoincrement())
+  street_address                                                       String                @db.VarChar(255)
+  city                                                                 String                @db.VarChar(50)
+  state                                                                String                @db.VarChar(2)
+  zipcode                                                              String?               @db.VarChar(5)
+  contact_information_contact_information_billing_address_idToaddress  contact_information[] @relation("contact_information_billing_address_idToaddress")
+  contact_information_contact_information_shipping_address_idToaddress contact_information[] @relation("contact_information_shipping_address_idToaddress")
+  order                                                                order[]
 }
 
-model orderitem {
-  orderitemid Int      @id(map: "orderitems_pkey") @default(autoincrement())
-  orderid     Int?
-  productid   Int?
-  order       order?   @relation(fields: [orderid], references: [orderid], onDelete: NoAction, onUpdate: NoAction, map: "orderitems_orderid_fkey")
-  product     product? @relation(fields: [productid], references: [productid], onDelete: NoAction, onUpdate: NoAction, map: "orderitems_productid_fkey")
+model contact_information {
+  id                                                       BigInt    @id @default(autoincrement())
+  email                                                    String    @db.VarChar(100)
+  phone                                                    String    @db.VarChar(10)
+  shipping_address_id                                      BigInt
+  billing_address_id                                       BigInt
+  address_contact_information_billing_address_idToaddress  address   @relation("contact_information_billing_address_idToaddress", fields: [billing_address_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "billing_address_id_fkey")
+  address_contact_information_shipping_address_idToaddress address   @relation("contact_information_shipping_address_idToaddress", fields: [shipping_address_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "shipping_address_id_fkey")
+  customer                                                 customer?
+
+  @@unique([id, email])
+}
+
+model order {
+  id                      BigInt   @id @default(autoincrement())
+  tracking_number         String   @db.VarChar(14)
+  shipped_from_address_id BigInt
+  purchase_date           DateTime @db.Date
+  estimated_delivery_date DateTime @db.Date
+  product_id              BigInt   @unique
+  quantity                Int
+  customer_id             BigInt
+  customer                customer @relation(fields: [customer_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  product                 product  @relation(fields: [product_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  address                 address  @relation(fields: [shipped_from_address_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model customer {
+  id                     BigInt              @id(map: "customer_id_pkey") @default(autoincrement())
+  first_name             String              @db.VarChar(50)
+  last_name              String              @db.VarChar(50)
+  contact_information_id BigInt              @unique
+  card_id                BigInt              @unique
+  password               String              @db.VarChar(255)
+  card_information       card_information    @relation(fields: [card_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  contact_information    contact_information @relation(fields: [contact_information_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  order                  order[]
+}
+
+model card_information {
+  id          BigInt    @id @default(autoincrement())
+  card_number String    @db.VarChar(16)
+  card_type   String    @db.VarChar(16)
+  customer    customer?
+}
+
+model inventory {
+  id      BigInt    @id
+  product product[]
 }
 
 model product {
-  productid        Int         @id(map: "products_pkey") @default(autoincrement())
-  itemname         String?     @db.VarChar(255)
-  priceperitem     Decimal?    @db.Decimal(10, 2)
-  shippedfrom      String?     @db.VarChar(255)
-  manufacturedfrom String?     @db.VarChar(255)
-  orderitem        orderitem[]
-}
-
-model user {
-  id              Int       @id(map: "customers_pkey") @default(autoincrement())
-  firstname       String    @db.VarChar(255)
-  lastname        String    @db.VarChar(255)
-  shippingaddress String?
-  shippingcity    String?   @db.VarChar(255)
-  shippingcountry String?   @db.VarChar(255)
-  billingcity     String?   @db.VarChar(255)
-  billingaddress  String?
-  phone           String?   @db.VarChar(20)
-  email           String?   @unique(map: "customers_email_key") @db.VarChar(255)
-  password        String?
-  createddate     DateTime? @db.Date
-  updateddate     DateTime? @db.Date
-  order           order[]
+  id           BigInt    @id @default(autoincrement())
+  product_name String    @db.VarChar(50)
+  price        Decimal   @db.Decimal(10, 2)
+  inventory_id BigInt
+  order        order?
+  inventory    inventory @relation(fields: [inventory_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "product_inventory_id")
 }

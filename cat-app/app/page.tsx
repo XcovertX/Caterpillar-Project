@@ -5,23 +5,29 @@ import { handler } from "./api/auth/[...nextauth]/route";
 import Header from "./components/Header";
 import Login from "./components/modal/Login";
 import Register from "./components/modal/Register";
-import Form from "./components/post/Form";
 import Logout from "./components/Logout";
-
+import { GET } from "./api/order/route"
+import UserHero from "./components/UserHero";
+import { redirect } from "next/navigation";
 
 export default async function Home() {
-  const session = await getServerSession(handler);
+  const session = await getServerSession();
   const currentUser = await current();
+  console.log("index ", session, currentUser)
   return (
     <>
       <Toaster />
       <Login />
-      {session ? "" : <Register />}
-      <Header label="Home" showBackArrow/>
-      <Logout />
-      <div className="h-screen overflow-scroll scrollbar-none">
-        <Form placeholder="what's your mind...?" />
-      </div>
+      {session ? 
+        <>
+          <Header label="Home" showBackArrow/>
+          <Logout />
+          <div>
+            {currentUser? redirect('/home') : '...loading...'}
+          </div>
+        </>
+        : 
+        <Register />}
     </>
   );
 }

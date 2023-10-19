@@ -1,22 +1,20 @@
+import { getServerSession } from "next-auth";
+import Logout from "../components/Logout";
+import { redirect } from "next/navigation";
 
-import { Customer } from '@/models/customer';
 
 export default async function Page() {
-
-  const response = await fetch(process.env.URL + '/api/customer');
-  console.log(response);
-  const data = response.json()
-  console.log(data);
+  const session = await getServerSession()
   return (
     <div>
-      <h1>Customer Data</h1>
-      {/* <ul>
-        {data.map((customer) => (
-          <li key={customer.id}>
-            {customer.firstName} {customer.lastName}
-          </li>
-        ))}
-      </ul> */}
+      {session? 
+      <>
+        <h1>Customer Data</h1>
+        {session?.user.email}
+      </>
+      : redirect('/')}
+      
+      <Logout />
     </div>
   );
 }

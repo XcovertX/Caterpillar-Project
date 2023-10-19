@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import Input from "../Input";
-import ImageUpload from "./ImageUpload";
 import Modal from "./Modal";
 
 function Edit({ user }) {
@@ -12,14 +11,14 @@ function Edit({ user }) {
   const [name, setName] = useState(user?.name);
   const [username, setUsername] = useState(user?.username);
   const [bio, setBio] = useState(user?.bio);
-  const [coverPic, setCoverPic] = useState(user?.coverPic);
-  const [profilePic, setProfilePic] = useState(user?.profilePic);
+//   const [coverPic, setCoverPic] = useState(user?.coverPic);
+//   const [profilePic, setProfilePic] = useState(user?.profilePic);
 
   const [isLoading, setIsLoading] = useState(false);
   const useEditModal = useEdit();
 
     const onSubmit = 
-    async (e) => {
+    async (e:any) => {
     try {
         setIsLoading(true);
         await fetch(`/api/user/${user.id}`, {
@@ -32,8 +31,8 @@ function Edit({ user }) {
             name,
             username,
             bio,
-            profilePic,
-            coverPic,
+            // profilePic,
+            // coverPic,
             }),
         });
         
@@ -50,7 +49,7 @@ function Edit({ user }) {
 
     const bodyContent = (
     <div className="flex flex-col gap-4">
-    <ImageUpload
+    {/* <ImageUpload
         value={profilePic}
         disabled={isLoading}
         onChange={(image) => setProfilePic(image)}
@@ -61,7 +60,7 @@ function Edit({ user }) {
         disabled={isLoading}
         onChange={(image) => setCoverPic(image)}
         label="Upload cover image"
-    />
+    /> */}
 
     <Input
         placeholder="Name"
@@ -69,12 +68,7 @@ function Edit({ user }) {
         value={name}
         disabled={isLoading}
     />
-    <Input
-        placeholder="Username"
-        onChange={(e) => setUsername(e.target.value)}
-        value={username}
-        disabled={isLoading}
-    />
+
     <Input
         placeholder="Bio"
         onChange={(e) => setBio(e.target.value)}

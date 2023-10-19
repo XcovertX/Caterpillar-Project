@@ -9,35 +9,37 @@ type Props = {
 // either a orderId or all orders if customerId number is provided
 export async function GET(request: any, { params }: Props) {
   try {
+
     if (!params.orderId && !params.customerId) {
-      return NextResponse.json("error: no orderId or customerId provided");
+      throw new Error("ERROR: no orderId or customerId provided");
     }
+    
     if (params.orderId && params.customerId) {
-      return NextResponse.json("error: please provide either customer id or order id, not both");
+      throw new Error("ERROR: please provide either customer id or order id, not both");
     }
 
     if(params.orderId) {
       const order = await prisma.order.findUnique({
         where: {
-          orderid: params.orderId,
+          id: params.orderId,
         },
-        include: {
-          user: true,
-        },
+
       });
       return NextResponse.json(order);
     } else {
       const order = await prisma.order.findMany({
         where: {
-          customerid: params.customerId,
+          customer_id: params.customerId,
         },
         include: {
-          user: true,
+          customer: true,
         },
       });
+      console.log("SUCCESS: ", order)
       return NextResponse.json(order);
     }
   } catch (error) {
+    console.error(error)
     return NextResponse.json("error", { status: 500 });
   } 
 }
