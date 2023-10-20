@@ -79,7 +79,7 @@ const PurchaseHistory = ({ orders }: Orders_db) => {
     }
 
   return(
-    <div className=" flex flex-col">
+    <div className="flex flex-col grow w-full">
       <h1 className='bg-sky-700 text-white p-2 text-2xl'>
         Purchase History
       </h1>
@@ -113,6 +113,7 @@ const PurchaseHistory = ({ orders }: Orders_db) => {
         </tbody>
       </table>  
     </div>
+
     )
 }
 

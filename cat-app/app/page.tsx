@@ -10,7 +10,7 @@ export default async function Home() {
   const session = await getServerSession();
   const currentUser = await current();
   const accountType = currentUser?.user_type
-  console.log(accountType)
+
   return (
     <div>
       <Toaster />

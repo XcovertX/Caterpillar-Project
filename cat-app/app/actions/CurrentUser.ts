@@ -10,7 +10,8 @@ const current = async () => {
       return null;
     }
 
-    const currentUser = await prisma.customer.findFirst({
+
+    const currentCustomer = await prisma.customer.findFirst({
 
       where: {
         contact_information: {
@@ -20,9 +21,10 @@ const current = async () => {
       include: {
         contact_information: true
       }
+
     });
 
-    if(!currentUser) {
+    if(!currentCustomer) {
       const currentAdmin = await prisma.admin.findFirst({
 
         where: {
@@ -34,10 +36,9 @@ const current = async () => {
           contact_information: true
         }
       });
-      return currentAdmin
+      return currentAdmin;
     }
-
-    return currentUser;
+    return currentCustomer;
   } catch (error) {
     console.error("CurrentUser Error: ", error)
     return null;

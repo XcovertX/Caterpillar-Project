@@ -25,7 +25,6 @@ import { Product_db, Product, Products_db } from '../types/product';
 const Inventory = ({ products }: Products_db) => {
     const router = useRouter()
     let data:Product[] = [];
-    console.log(products)
     products.map((product: Product_db) => {
     data.push(
         {

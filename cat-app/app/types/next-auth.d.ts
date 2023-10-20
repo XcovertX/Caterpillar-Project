@@ -22,6 +22,7 @@ declare module "next-auth" {
     data: {
       email: string;
       userType: string;
+      id: string;
     } & DefaultUser['user']
   }
 
@@ -34,10 +35,10 @@ declare module "next-auth/jwt" {
     // Returned by the `jwt` callback and `getToken`, when using JWT sessions
     interface JWT {
       // OpenID ID Token
-      customerId:   number
+      customerId:   string
       idToken?:     string
       provider?:    string
       accessToken?: string
-      userType:  string
+      userType:     string
     }
   }

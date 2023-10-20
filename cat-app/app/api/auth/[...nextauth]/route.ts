@@ -88,6 +88,7 @@ export const handler = NextAuth({
         token.accessToken = account.access_token
       }
       if (user) {
+        token.customerId  = user.id.toString()
         token.email       = user.contact_information.email
         token.userType    = user.user_type
       }

@@ -79,7 +79,11 @@ export async function POST(request: any) {
         card_id:      card.id,
         contact_information_id: contact.id
       },
+      include: {
+            order: true
+      }
     });
+
     const newUser = { 
       customer: customer
     }

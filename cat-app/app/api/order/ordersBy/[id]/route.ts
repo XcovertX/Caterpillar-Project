@@ -8,7 +8,6 @@ type Props = {
 
 // dynamic GET async handler for retrieving an order by customerId
 export async function GET(request: any, { params }: Props) {
-  console.log("apiorder:",params)
   try {
 
     if (!params.id) {

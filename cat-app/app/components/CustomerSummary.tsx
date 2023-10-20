@@ -16,7 +16,7 @@ const CustomerSummary = ({ customer, orders, shippingAddress, billingAddress }: 
 
     return (
         <div className=''>
-            <div className='rounded-md bg-zinc-100 shadow-lg items-center w-full flex flex-col'>
+            <div className=' rounded-md bg-zinc-100 shadow-lg items-center w-full flex flex-col'>
                 <div className='p-5 bg-sky-500 items-center w-full'>
                     <h1 className="text-2xl text-white text-center ">Customer Summary</h1>
                 </div>
@@ -50,7 +50,7 @@ const CustomerSummary = ({ customer, orders, shippingAddress, billingAddress }: 
                         </div>
                     </div>
                 </div>
-                <div className="pb-5">
+                <div className="p-5 w-full">
                     <PurchaseHistory orders={orders}/>
                 </div>
             </div>

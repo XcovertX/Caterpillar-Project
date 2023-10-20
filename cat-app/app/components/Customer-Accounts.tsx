@@ -76,11 +76,11 @@ const Customers = ({ customers }: Customers_db) => {
     }
 
   return(
-    <div className=" flex flex-col rounded-md">
-      <h1 className='bg-sky-700 p-2 text-2xl text-center'>
+    <div className=" flex flex-col shadow-lg rounded-md">
+      <h1 className='bg-sky-700 p-2 text-2xl text-white text-center'>
         All Customers
       </h1>
-      <table className='bg-sky-500'>
+      <table className='bg-sky-500 text-white'>
         <thead className='bg-sky-900'>
           {table.getHeaderGroups().map((headerGroup, i) => (
             <tr key={headerGroup.id}>
