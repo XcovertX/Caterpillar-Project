@@ -18,7 +18,7 @@ const useLoginModal:any    = useLogin()
 const onToggle = useCallback(() => {
   useRegisterModal.onOpen()
   useLoginModal.onClose()
-}, [useRegisterModal,useLoginModal ])
+}, [useRegisterModal, useLoginModal])
 const onSubmit = useCallback(async () => {
   try {
     setIsLoading(true);

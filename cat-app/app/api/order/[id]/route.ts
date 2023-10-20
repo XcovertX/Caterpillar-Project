@@ -3,26 +3,31 @@ import { replacer } from "@/app/lib/utils";
 import { NextResponse } from "next/server";
 
 type Props = {
-  params: { orderId?: number, customerId?:number }
+  params: { id?: number, customerId?:number }
 }
 
 // dynamic GET async handler for retrieving an order by
 // either a orderId or all orders if customerId number is provided
 export async function GET(request: any, { params }: Props) {
+  console.log("apiorder:",params)
   try {
 
-    if (!params.orderId && !params.customerId) {
+    if (!params.id && !params.customerId) {
       throw new Error("ERROR: no orderId or customerId provided");
     }
     
-    if (params.orderId && params.customerId) {
+    if (params.id && params.customerId) {
       throw new Error("ERROR: please provide either customer id or order id, not both");
     }
 
-    if(params.orderId) {
+    if(params.id) {
       const order = await prisma.order.findUnique({
         where: {
-          id: params.orderId,
+          id: params.id,
+        },
+        include: {
+          product: true,
+          address:true
         },
       });
       const orderString = JSON.stringify(order, replacer) // handler for BigInt data type stringify serielization
@@ -36,6 +41,7 @@ export async function GET(request: any, { params }: Props) {
           customer: true,
         },
       });
+      
       const orderString = JSON.stringify(order, replacer) // handler for BigInt data type stringify serielization
       return NextResponse.json(orderString);
     }

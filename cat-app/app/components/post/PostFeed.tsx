@@ -8,7 +8,7 @@ type Props = {
 
 async function PostFeed({userId, currentUser}: Props) {
     const posts = await getPosts()
-    console.log(posts)
+
   const FilterPosts = userId ? posts.filter((post) => post.user.id === userId || post.userId === userId) : posts 
 
   return (

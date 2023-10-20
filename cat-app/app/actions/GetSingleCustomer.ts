@@ -1,7 +1,7 @@
-export default async function getSingleUser(userId: bigint) {
+export default async function getSingleCustomerByUserId(customerId: bigint) {
     const baseUrl = process.env.URL;
     try{
-      const res = await fetch(`${baseUrl}/api/user/${userId}`, { next: { revalidate: 0 } } );
+      const res = await fetch(`${baseUrl}/api/customer/${customerId}`, { next: { revalidate: 0 } } );
       if (!res.ok) {
         throw new Error(`Could not get user`);
       }
@@ -10,5 +10,4 @@ export default async function getSingleUser(userId: bigint) {
       console.error("ERROR: Could not retrieve the user.", error)
       return null;
     }
-
   }

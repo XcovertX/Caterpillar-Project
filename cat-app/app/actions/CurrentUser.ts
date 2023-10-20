@@ -6,10 +6,7 @@ const current = async () => {
 
   try {
     const session = await getServerSession();
-
     if (!session?.user?.email) {
-      console.log("no session -> user -> email")
-      console.log(session)
       return null;
     }
 
@@ -24,6 +21,21 @@ const current = async () => {
         contact_information: true
       }
     });
+
+    if(!currentUser) {
+      const currentAdmin = await prisma.admin.findFirst({
+
+        where: {
+          contact_information: {
+            email: session?.user.email
+          } 
+        },
+        include: {
+          contact_information: true
+        }
+      });
+      return currentAdmin
+    }
 
     return currentUser;
   } catch (error) {

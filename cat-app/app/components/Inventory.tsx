@@ -6,56 +6,33 @@ import {
     getCoreRowModel,
     useReactTable,
   } from '@tanstack/react-table'
-import { dateFormater } from '../lib/utils';
-import {  useRouter } from 'next/navigation';
-import { Orders_db } from '../types/order';
+import { useRouter } from 'next/navigation';
+import { Product_db, Product, Products_db } from '../types/product';
 
-type Order = {
-    id:             bigint
-    orderDate:      string
-    item:           string
-    trackingNumber: string
-    individualCost: number
-    quantity:       number
-    totalCost:      number
-}
-
-  const columnHelper = createColumnHelper<Order>()
+  const columnHelper = createColumnHelper<Product>()
   const columns = [
         columnHelper.accessor('id', {
-        header: 'OrderID'}),
-      columnHelper.accessor('orderDate', {
-          header: 'Order Date'}),
-      columnHelper.accessor('item', {
-          header: 'Item',
+        header: 'Product ID'}),
+
+      columnHelper.accessor('productName', {
+          header: 'Item Name',
       }),
-      columnHelper.accessor('trackingNumber', {
-          header: 'Tracking Number',
-      }),
-      columnHelper.accessor('individualCost', {
-          header: 'Cost Per Item',
-      }),
-      columnHelper.accessor('quantity', {
-          header: 'Quantity',
-      }),
-      columnHelper.accessor('totalCost', {
-          header: 'Total Cost',
+      columnHelper.accessor('price', {
+          header: 'Price Per Item',
       }),
     ]
 
-const PurchaseHistory = ({ orders }: Orders_db) => {
+const Inventory = ({ products }: Products_db) => {
     const router = useRouter()
-    let data:Order[] = [];
-    orders.map((order, i) => {
+    let data:Product[] = [];
+    console.log(products)
+    products.map((product: Product_db) => {
     data.push(
         {
-            id:             order.id,
-            orderDate:      dateFormater(order.purchase_date),
-            item:           order.product.product_name,
-            trackingNumber: order.tracking_number,
-            individualCost: order.product.price,
-            quantity:       order.quantity,
-            totalCost:      order.total
+            id:          product.id,
+            productName: product.product_name,
+            price:       product.price,
+            inventoryId: product.inventory_id
         }
     )})
 
@@ -74,17 +51,17 @@ const PurchaseHistory = ({ orders }: Orders_db) => {
     }
 
     // function to handle row selection and dynamic routing
-    const handleRowClick = (row: Row<Order>) => {
-        router.push(`/purchase-history/${row.original.id}`)
+    const handleRowClick = (row: Row<Product>) => {
+        router.push(`/inventory/${row.original.id}`)
     }
 
   return(
     <div className=" flex flex-col">
-      <h1 className='bg-sky-700 text-white p-2 text-2xl'>
-        Purchase History
+      <h1 className='bg-sky-700 p-2 text-2xl'>
+        All Products Offered
       </h1>
       <table className='bg-sky-500'>
-        <thead className='bg-sky-900 text-white'>
+        <thead className='bg-sky-900'>
           {table.getHeaderGroups().map((headerGroup, i) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map(header => (
@@ -116,4 +93,4 @@ const PurchaseHistory = ({ orders }: Orders_db) => {
     )
 }
 
-export default PurchaseHistory
+export default Inventory

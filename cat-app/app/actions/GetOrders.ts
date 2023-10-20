@@ -1,4 +1,3 @@
-import { replacer } from "../lib/utils";
 
 export default async function getOrders() {
     const baseUrl = process.env.URL;
@@ -14,5 +13,21 @@ export default async function getOrders() {
       return res.json();
     } catch(error) {
       console.error(error)
+    }
+  }
+
+  export async function getOrdersByCutomerId(customerID: bigint) {
+    const baseUrl = process.env.URL;
+    try{
+      console.log("orders ", customerID)
+      const res = await fetch(`${baseUrl}/api/order/ordersBy/${customerID}`, { next: { revalidate: 0 } } );
+      if (!res.ok) {
+        console.log(res)
+        throw new Error();
+      }
+      return res.json();
+    } catch(error) {
+      console.error("ERROR: Could not retrieve the order: ", error)
+      return null;
     }
   }

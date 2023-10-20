@@ -1,8 +1,9 @@
 import prisma from "@/app/lib/prismadb";
+import { replacer } from "@/app/lib/utils";
 import { NextResponse } from "next/server";
 
 type Props = {
-  params: { userId: bigint }
+  params: { customerId: bigint }
 }
 
 // dynamic GET async handler for retrieving an existing user's information
@@ -11,10 +12,15 @@ export async function GET(request: any, { params }: Props) {
   try {
     const user = await prisma.customer.findUnique({
       where: {
-        id: params.userId,
+        id: params.customerId,
       },
+      include: {
+        card_information: true,
+        contact_information: true
+      }
     });
-    return NextResponse.json(user);
+    const customer = JSON.stringify(user, replacer)
+    return NextResponse.json(customer);
   } catch (error) {
     console.log(error);
   }
@@ -27,7 +33,7 @@ export async function PATCH(request: any, { params }: Props) {
   try {
     const updateUser = await prisma.customer.update({
       where: {
-        id: params.userId,
+        id: params.customerId,
       },
       data: {
         // first_name: body.firstname,
