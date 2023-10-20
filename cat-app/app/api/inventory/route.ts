@@ -36,7 +36,7 @@ export async function POST(request: any) {
         customer_id: CurrentUser.id,
       },
     });
-    console.log("order created");
+  
     return Response.json(order);
   } catch (error) {
     console.error(error);

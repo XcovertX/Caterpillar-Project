@@ -51,7 +51,7 @@ export const handler = NextAuth({
 
           // if customer account is found, check the password then return customer
           if (customer) {
-            isCorrectPassword = customer?.password === credentials.password // md5(credentials.password);
+            isCorrectPassword = customer?.password ===  md5(credentials.password);
             if (!isCorrectPassword) {
               
               throw new Error('Invalid credentials');
@@ -62,7 +62,7 @@ export const handler = NextAuth({
             // if admin account is found, check the password then return admin
           }
           if (admin) {
-            isCorrectPassword = admin?.password === credentials.password // md5(credentials.password);
+            isCorrectPassword = admin?.password === md5(credentials.password);
             if (!isCorrectPassword) {
               throw new Error('Invalid credentials');
             }

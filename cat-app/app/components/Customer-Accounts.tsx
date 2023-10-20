@@ -29,7 +29,7 @@ const Customers = ({ customers }: Customers_db) => {
     const router = useRouter()
 
     let data:Customer[] = [];
-    console.log(customers)
+
     customers.map((customer: Customer_db) => {
     data.push(
         {
@@ -76,7 +76,7 @@ const Customers = ({ customers }: Customers_db) => {
     }
 
   return(
-    <div className=" flex flex-col">
+    <div className=" flex flex-col rounded-md">
       <h1 className='bg-sky-700 p-2 text-2xl text-center'>
         All Customers
       </h1>

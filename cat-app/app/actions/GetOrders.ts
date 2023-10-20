@@ -19,10 +19,9 @@ export default async function getOrders() {
   export async function getOrdersByCutomerId(customerID: bigint) {
     const baseUrl = process.env.URL;
     try{
-      console.log("orders ", customerID)
+
       const res = await fetch(`${baseUrl}/api/order/ordersBy/${customerID}`, { next: { revalidate: 0 } } );
       if (!res.ok) {
-        console.log(res)
         throw new Error();
       }
       return res.json();

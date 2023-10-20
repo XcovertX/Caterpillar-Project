@@ -14,8 +14,8 @@ import Seperator from "../Seperator";
 function Register() {
   const [email, setEmail]             = useState("");
   const [password, setPassword]       = useState("");
-  const [firstname, setFirstName]     = useState("");
-  const [lastname, setLastName]       = useState("");
+  const [firstName, setFirstName]     = useState("");
+  const [lastName, setLastName]       = useState("");
   const [shipAddress, setShipAddress] = useState("");
   const [shipCity, setShipCity]       = useState("");
   const [shipState, setShipState]     = useState("");
@@ -45,8 +45,8 @@ function Register() {
         body: JSON.stringify({
           email,
           password,
-          firstname,
-          lastname,
+          firstName,
+          lastName,
           phoneNumber,
           shipAddress,
           shipCity,
@@ -78,8 +78,8 @@ function Register() {
     useRegisterModal, 
     email, 
     password, 
-    firstname, 
-    lastname,
+    firstName, 
+    lastName,
     shipAddress,
     shipCity,
     shipCountry,
@@ -102,14 +102,14 @@ function Register() {
           disabled={isLoading}
           placeholder="Fisrt Name"
           type="text"
-          value={firstname}
+          value={firstName}
           onChange={(e:any) => setFirstName(e.target.value)}
         />      
         <Input
           disabled={isLoading}
           placeholder="Last Name"
           type="text"
-          value={lastname}
+          value={lastName}
           onChange={(e:any) => setLastName(e.target.value)}
         />
       </div>
