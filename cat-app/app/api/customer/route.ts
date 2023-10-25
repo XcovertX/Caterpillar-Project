@@ -12,7 +12,6 @@ export async function GET() {
       },
       include: {
         card_information: true,
-        contact_information: true
       }
     });
     const customers = JSON.stringify(users, replacer)

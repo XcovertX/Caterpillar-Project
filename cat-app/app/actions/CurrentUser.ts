@@ -14,12 +14,7 @@ const current = async () => {
     const currentCustomer = await prisma.customer.findFirst({
 
       where: {
-        contact_information: {
-          email: session?.user.email
-        } 
-      },
-      include: {
-        contact_information: true
+        email: session?.user.email 
       }
 
     });
@@ -28,13 +23,8 @@ const current = async () => {
       const currentAdmin = await prisma.admin.findFirst({
 
         where: {
-          contact_information: {
             email: session?.user.email
-          } 
-        },
-        include: {
-          contact_information: true
-        }
+        } 
       });
       return currentAdmin;
     }

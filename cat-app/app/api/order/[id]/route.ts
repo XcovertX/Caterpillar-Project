@@ -26,8 +26,7 @@ export async function GET(request: any, { params }: Props) {
           id: params.id,
         },
         include: {
-          product: true,
-          address:true
+          item: true
         },
       });
       const orderString = JSON.stringify(order, replacer) // handler for BigInt data type stringify serielization

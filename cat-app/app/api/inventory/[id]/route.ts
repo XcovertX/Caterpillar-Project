@@ -12,7 +12,7 @@ export async function GET(request: any, { params }: Props) {
     if (!params.id) {
       throw new Error("ERROR: no productId");
     }
-      const order = await prisma.product.findUnique({
+      const order = await prisma.item.findUnique({
         where: {
           id: params.id,
         },

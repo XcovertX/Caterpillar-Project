@@ -15,8 +15,7 @@ export async function GET(request: any, { params }: Props) {
         id: params.customerId,
       },
       include: {
-        card_information: true,
-        contact_information: true
+        card_information: true
       }
     });
     const customer = JSON.stringify(user, replacer)

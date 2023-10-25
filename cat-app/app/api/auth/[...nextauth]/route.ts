@@ -25,12 +25,7 @@ export const handler = NextAuth({
           // attempt to locate customer account with the provided email
           customer = await prisma.customer.findFirst({
             where: {
-              contact_information: {
-                email: credentials.email
-              }
-            },
-            include: {
-              contact_information: true
+              email: credentials.email
             }
           });
 
@@ -39,13 +34,8 @@ export const handler = NextAuth({
           if (!customer) {
             admin = await prisma.admin.findFirst({
               where: {
-                contact_information: {
-                  email: credentials.email
-                }
+                email: credentials.email
               },
-              include: {
-                contact_information: true
-              }
             });
           }
 

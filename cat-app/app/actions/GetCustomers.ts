@@ -5,7 +5,7 @@ export default async function getAllCustomers() {
     const currentUser = await current()
     
     try {
-      if(!(currentUser?.user_type == 'Admin')) {
+      if(!(currentUser?.user_type == 'admin')) {
         throw new Error(`ERROR: User is not admin authorized.`);
       }
       const res = await fetch(`${baseUrl}/api/customer`, { next: { revalidate: 0 } } );

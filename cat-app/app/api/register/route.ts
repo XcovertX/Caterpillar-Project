@@ -28,7 +28,7 @@ export async function POST(request: any) {
     password,  } = await request.json();
 
     // build new card
-    const card = await prisma.card_information.create({
+    const card = await prisma.card.create({
       data: {
         card_number: cardNumber,
         card_type:   cardType
@@ -38,10 +38,8 @@ export async function POST(request: any) {
     // build new shipping and billing address. if no billing address is provided, shipping adress with be used.
     const addressShipping = await prisma.address.create({
       data: {
-        street_address: shipCity,
+        street: shipCity,
         city:           shipCity,
-        state:          shipState,
-        zipcode:        shipZip,
         country:        shipCountry
       }
     })
@@ -49,25 +47,14 @@ export async function POST(request: any) {
     if(shipAdress != billAdress) {
       addressBilling = await prisma.address.create({
         data: {
-          street_address: billCity,
+          street: billCity,
           city:           billCity,
-          state:          billState,
-          zipcode:        billZip,
           country:        billCountry
         }
       })
     } else {
       addressBilling = addressShipping
     }
-    // build new contact info
-    const contact = await prisma.contact_information.create({
-      data: {
-        email: email,
-        phone: phoneNumber,
-        shipping_address_id: addressShipping.id,
-        billing_address_id: addressBilling.id
-      }
-    })
     // build new customer
     const customer = await prisma.customer.create({
       data: {
@@ -75,9 +62,12 @@ export async function POST(request: any) {
         last_name:    lastName,
         password:     md5(password),
         created_date: new Date(Date.now()),
-        user_type:   'Customer',
+        user_type:   'customer',
         card_id:      card.id,
-        contact_information_id: contact.id
+        email: email,
+        phone: phoneNumber,
+        shipping_address_id: addressShipping.id,
+        billing_address_id: addressBilling.id
       },
       include: {
             order: true
