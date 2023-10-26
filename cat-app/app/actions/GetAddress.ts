@@ -9,6 +9,6 @@ export async function getAddressByAddressId(addressId: bigint) {
       return res.json();
     } catch(error) {
       console.error("ERROR: Could not retrieve the address: ", error)
-      return null;
+      return null; 
     }
   }

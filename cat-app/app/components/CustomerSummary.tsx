@@ -38,15 +38,15 @@ const CustomerSummary = ({ customer, orders, shippingAddress, billingAddress }: 
                     <div className="flex flex-row">
                         <div className='p-2 text-sky-900 flex flex-col justify-between'>
                             <h1 className='font-bold text-xl'>Shipping Address</h1>
-                            <h1>{shippingAddress.street_address}</h1>
-                            <h1>{shippingAddress.city}, {shippingAddress.state}</h1>
-                            <h1>{shippingAddress.zipcode}, {shippingAddress.country}</h1>
+                            <h1>{shippingAddress.street}</h1>
+                            <h1>{shippingAddress.city}</h1>
+                            <h1>{shippingAddress.country}</h1>
                         </div>
                         <div className='p-2 text-sky-900 flex flex-col justify-between'>
                             <h1 className='font-bold text-xl'>Billing Address</h1>
-                            <h1>{shippingAddress.street_address}</h1>
-                            <h1>{shippingAddress.city}, {shippingAddress.state}</h1>
-                            <h1>{shippingAddress.zipcode}, {shippingAddress.country}</h1>
+                            <h1>{shippingAddress.street}</h1>
+                            <h1>{shippingAddress.city}</h1>
+                            <h1>{shippingAddress.country}</h1>
                         </div>
                     </div>
                 </div>

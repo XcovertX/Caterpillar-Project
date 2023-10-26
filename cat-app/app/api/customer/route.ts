@@ -15,9 +15,11 @@ export async function GET() {
       }
     });
     const customers = JSON.stringify(users, replacer)
-    
+    await prisma.$disconnect();
     return NextResponse.json(customers);
   } catch (error) {
     console.error(error);
+    await prisma.$disconnect();
+    return null;
   }
 }

@@ -17,14 +17,15 @@ export async function GET() {
         purchase_date: "desc",
       },
       include: {
-        product: true,
-        address:true
+        item: true
       },
     });
     const ordersString = JSON.stringify(orders, replacer) // handler for BigInt data type stringify serielization
+    await await prisma.$disconnect();
     return NextResponse.json(ordersString);
   } catch (error) {
     console.error("ERROR: failed to retrieve orders", error);
+    await await prisma.$disconnect();
     return new NextResponse("Internal error: ", { status: 500 });
   }
 }
@@ -45,8 +46,11 @@ export async function POST(request: any) {
       },
     });
     console.log("order created");
+    await await prisma.$disconnect();
     return Response.json(order);
   } catch (error) {
     console.error(error);
+    await await prisma.$disconnect();
+    return null;
   }
 }

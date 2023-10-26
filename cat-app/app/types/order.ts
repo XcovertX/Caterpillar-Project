@@ -1,26 +1,18 @@
-export type Order_db = {
-    id:                      bigint;
-    tracking_number:         string;
-    shipped_from_address_id: bigint;
-    purchase_date:           Date;
-    estimated_delivery_date: Date;
-    product_id:              bigint;
-    quantity:                number;
-    customer_id:             bigint;
-    total:                   number;
-    product: {
-        id:                  bigint;
-        product_name:        string;
-        price:               number;
-        inventory_id:        bigint;
-},
-    address: {
-        id:                  bigint;
-        street_address:      string;
-        city:                string;
-        state:               string;
-        zipcode:             string;
-        country:             string;
+export type Order_db =         
+{
+  id:                      bigint;
+  tracking_number:         string;
+  shipped_from:            string;
+  purchase_date:           Date;
+  estimated_delivery_date: Date;
+  item_id:                 bigint;
+  item_quantity:           number;
+  customer_id:             number;
+  item: {
+      id:                  bigint;
+      name:                string;
+      price:               number;
+      manufactured_from:   string;
   }
 }
 
@@ -29,26 +21,17 @@ export type Order_db = {
         {
           id:                      bigint;
           tracking_number:         string;
-          shipped_from_address_id: bigint;
+          shipped_from:            string;
           purchase_date:           Date;
           estimated_delivery_date: Date;
-          product_id:              bigint;
-          quantity:                number;
-          customer_id:             bigint;
-          total:                   number;
-          product: {
+          item_id:                 bigint;
+          item_quantity:           number;
+          customer_id:             number;
+          item: {
               id:                  bigint;
-              product_name:        string;
+              name:                string;
               price:               number;
-              inventory_id:        bigint;
-        },
-          address: {
-              id:                  bigint;
-              street_address:      string;
-              city:                string;
-              state:               string;
-              zipcode:             string;
-              country:             string;
+              manufactured_from:   string;
         }
       }
     ]
@@ -56,18 +39,17 @@ export type Order_db = {
 
   export type OrderSummary = {
     order: {
-        orderDate:               string
-        item:                    string
-        trackingNumber:          string
-        shippedFromAddress: {
-            streetAddress:       string
-            city:                string
-            state:               string
-            zipCode:             string
-            country:             string
-        }
-        individualCost:          number
-        quantity:                number
-        totalCost:               number
+      id:                      number
+      orderDate:               string
+      etaDate:                 string
+      item:    {
+        id:                    number
+        name:                  string
+        price:                 number
+      }
+      trackingNumber:          string
+      shippedFromAddress:      string
+      itemQuantity:           number
+      totalCost:               number
     }
 }

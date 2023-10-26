@@ -14,8 +14,10 @@ export async function GET(request: any, { params }: Props) {
         id: params.userId,
       },
     });
+    await prisma.$disconnect();
     return NextResponse.json(user);
   } catch (error) {
+    await prisma.$disconnect();
     console.log(error);
   }
 }
@@ -42,9 +44,10 @@ export async function PATCH(request: any, { params }: Props) {
         // password: body.password
       },
     });
-
+    await prisma.$disconnect();
     return Response.json(updateUser, { status: 200 });
   } catch (error) {
+    await prisma.$disconnect();
     return NextResponse.json("error", { status: 500 });
   }
 }

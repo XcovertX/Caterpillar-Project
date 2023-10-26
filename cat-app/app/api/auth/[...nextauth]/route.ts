@@ -41,21 +41,21 @@ export const handler = NextAuth({
 
           // if customer account is found, check the password then return customer
           if (customer) {
-            isCorrectPassword = customer?.password ===  md5(credentials.password);
+            isCorrectPassword = customer?.password === credentials.password //md5(credentials.password);
             if (!isCorrectPassword) {
-              
               throw new Error('Invalid credentials');
             }
-            
+            await prisma.$disconnect();
             return customer;
 
             // if admin account is found, check the password then return admin
           }
           if (admin) {
-            isCorrectPassword = admin?.password === md5(credentials.password);
+            isCorrectPassword = admin?.password === credentials.password //md5(credentials.password);
             if (!isCorrectPassword) {
               throw new Error('Invalid credentials');
             }
+            await prisma.$disconnect();
             return admin;
           }
           if (!customer && !admin) {
@@ -63,6 +63,7 @@ export const handler = NextAuth({
           }
         } catch(error) {
           console.error(error)
+          await prisma.$disconnect();
           return null;
         }
       }
@@ -79,7 +80,7 @@ export const handler = NextAuth({
       }
       if (user) {
         token.customerId  = user.id.toString()
-        token.email       = user.contact_information.email
+        token.email       = user.email
         token.userType    = user.user_type
       }
       return token
@@ -92,7 +93,7 @@ export const handler = NextAuth({
       
       if(user) {
         session.user.userType = token.userType
-        session.user.email = user.contact_information.email
+        session.user.email = user.email
       }
   
       return session

@@ -8,16 +8,17 @@ import {
   } from '@tanstack/react-table'
 import { dateFormater } from '../lib/utils';
 import {  useRouter } from 'next/navigation';
-import { Orders_db } from '../types/order';
+import { OrderSummary, Orders_db } from '../types/order';
 
 type Order = {
-    id:             bigint
-    orderDate:      string
-    item:           string
-    trackingNumber: string
-    individualCost: number
-    quantity:       number
-    totalCost:      number
+    id:                 bigint
+    orderDate:          string
+    item:               string
+    trackingNumber:     string
+    individualCost:     string
+    shippedFromAddress: string
+    itemQuantity:       number
+    totalCost:          string
 }
 
   const columnHelper = createColumnHelper<Order>()
@@ -35,7 +36,7 @@ type Order = {
       columnHelper.accessor('individualCost', {
           header: 'Cost Per Item',
       }),
-      columnHelper.accessor('quantity', {
+      columnHelper.accessor('itemQuantity', {
           header: 'Quantity',
       }),
       columnHelper.accessor('totalCost', {
@@ -45,17 +46,19 @@ type Order = {
 
 const PurchaseHistory = ({ orders }: Orders_db) => {
     const router = useRouter()
-    let data:Order[] = [];
+    let data:OrderSummary[] = [];
     orders.map((order, i) => {
     data.push(
         {
             id:             order.id,
             orderDate:      dateFormater(order.purchase_date),
-            item:           order.product.product_name,
+            etaDate:        dateFormater(order.estimated_delivery_date),
+            item:           order.item.name,
             trackingNumber: order.tracking_number,
-            individualCost: order.product.price,
-            quantity:       order.quantity,
-            totalCost:      order.total
+            individualCost: "$ " + order.item.price.toFixed(2),
+            shippedFromAddress: order.shipped_from,
+            itemQuantity:   order.item_quantity,
+            totalCost:      "$ " + (order.item.price * order.item_quantity).toFixed(2)
         }
     )})
 

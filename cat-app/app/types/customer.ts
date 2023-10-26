@@ -1,3 +1,5 @@
+import { Address } from "./address"
+
 export type Customers = {
     customers: Customer[]
 }
@@ -6,7 +8,6 @@ export type Customer = {
           id:                   bigint
           firstName:            string
           lastName:             string
-          contactInformationId: bigint
           cardId:               bigint
           password:             string
           createdDate:          Date
@@ -16,13 +17,10 @@ export type Customer = {
             cardNumber:         string,
             cardType:           string
           }, 
-          contactInformation: {
-            id:                 bigint,
-            email:              string,
-            phone:              string,
-            shippingAddressId:  bigint,
-            billingAddressId:   bigint
-          }
+          email:                string,
+          phone:                string,
+          shippingAddressId:    bigint,
+          billingAddressId:     bigint
         
     }
 
@@ -43,13 +41,9 @@ export type Customer_db = {
         id:                  bigint,
         card_number:         string,
         card_type:           string
-      },
-      contact_information: {
-        id:                  bigint,
-        email:               string,
-        phone:               string,
-        shipping_address_id: bigint,
-        billing_address_id:  bigint
-      }
-  
+    },
+    email:                   string,
+    phone:                   string,
+    shipping_address:        Address,
+    billing_address:         Address
 }

@@ -19,15 +19,17 @@ export async function GET(request: any, { params }: Props) {
         },
         include: {
           customer: true,
-          product: true
+          item: true
         },
       });
       
       const orderString = JSON.stringify(order, replacer) // handler for BigInt data type stringify serielization
+      await prisma.$disconnect();
       return NextResponse.json(orderString);
     
   } catch (error) {
     console.error(error)
+    await prisma.$disconnect();
     return NextResponse.json("error", { status: 500 });
   } 
 }

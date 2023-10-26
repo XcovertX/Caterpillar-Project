@@ -18,6 +18,7 @@ const current = async () => {
       }
 
     });
+    
 
     if(!currentCustomer) {
       const currentAdmin = await prisma.admin.findFirst({
@@ -28,9 +29,14 @@ const current = async () => {
       });
       return currentAdmin;
     }
+    if(currentCustomer.user_type === null) {
+      currentCustomer.user_type = "customer";
+    }
+    await prisma.$disconnect();
     return currentCustomer;
   } catch (error) {
     console.error("CurrentUser Error: ", error)
+    await prisma.$disconnect();
     return null;
   }
 };

@@ -23,9 +23,9 @@ export default async function Page( props: Params ) {
   return (
     <div>
       {session? 
-      <>
-        <ProductSummary {...productSummary} />
-      </>
+
+      <ProductSummary {...productSummary} />
+
       : redirect('/')}
     </div>
   );

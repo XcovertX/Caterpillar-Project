@@ -20,12 +20,13 @@ export async function GET(request: any, { params }: Props) {
           id: params.id,
         },
       });
-      
+      await prisma.$disconnect();
       const orderString = JSON.stringify(order, replacer) // handler for BigInt data type stringify serielization
       return NextResponse.json(orderString);
     
   } catch (error) {
     console.error(error)
+    await prisma.$disconnect();
     return NextResponse.json("error", { status: 500 });
   } 
 }

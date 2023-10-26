@@ -30,6 +30,7 @@ export async function GET(request: any, { params }: Props) {
         },
       });
       const orderString = JSON.stringify(order, replacer) // handler for BigInt data type stringify serielization
+      await prisma.$disconnect();
       return NextResponse.json(orderString);
     } else {
       const order = await prisma.order.findMany({
@@ -42,10 +43,12 @@ export async function GET(request: any, { params }: Props) {
       });
       
       const orderString = JSON.stringify(order, replacer) // handler for BigInt data type stringify serielization
+      await prisma.$disconnect();
       return NextResponse.json(orderString);
     }
   } catch (error) {
     console.error(error)
+    await prisma.$disconnect();
     return NextResponse.json("error", { status: 500 });
   } 
 }

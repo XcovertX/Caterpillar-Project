@@ -60,7 +60,7 @@ export async function POST(request: any) {
       data: {
         first_name:   firstName, 
         last_name:    lastName,
-        password:     md5(password),
+        password:     password, //md5(password),
         created_date: new Date(Date.now()),
         user_type:   'customer',
         card_id:      card.id,
@@ -78,5 +78,6 @@ export async function POST(request: any) {
       customer: customer
     }
   const user = JSON.stringify(newUser, replacer)
+  await prisma.$disconnect();
   return NextResponse.json(user);
 }

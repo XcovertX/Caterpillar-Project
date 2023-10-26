@@ -28,3 +28,15 @@ export function replacer(key:any, value:any) {
     return `${month}/${day}/${year}`;
 
   }
+
+  export function buildTrackingNumber() {
+    const rand = Math.random()
+    const num = (rand * 100000000).toString()
+    return "Unq" + num + "US"
+  }
+
+  export function getRandomDate() {
+    const randMonth = Math.floor(Math.random() * 12)
+    const randDay = Math.floor(Math.random() * 30)
+    return new Date(randMonth.toString() + "-" + randDay.toString() + "-" +"2024")
+  }

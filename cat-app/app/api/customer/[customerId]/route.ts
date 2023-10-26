@@ -15,13 +15,21 @@ export async function GET(request: any, { params }: Props) {
         id: params.customerId,
       },
       include: {
-        card_information: true
+        card_information: true,
+        address_customer_shipping_address_idToaddress: true,
+        address_customer_billing_address_idToaddress: true,
       }
     });
+    if(user != null && user != undefined) {
+      user.user_type = "customer";
+    }
     const customer = JSON.stringify(user, replacer)
+    await prisma.$disconnect();
     return NextResponse.json(customer);
   } catch (error) {
+    await prisma.$disconnect();
     console.log(error);
+    return null
   }
 }
 
@@ -47,9 +55,10 @@ export async function PATCH(request: any, { params }: Props) {
         // password: body.password
       },
     });
-
+    await prisma.$disconnect();
     return Response.json(updateUser, { status: 200 });
   } catch (error) {
+    prisma.$disconnect()
     return NextResponse.json("error", { status: 500 });
   }
 }
