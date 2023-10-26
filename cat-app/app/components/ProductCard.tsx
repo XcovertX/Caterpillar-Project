@@ -1,5 +1,6 @@
 import { Product } from "../types/product"
 import { useCartStore } from "./UseCartStore"
+require('./patch.js') //bigint isssue
 
 type Props = {
     product: Product
@@ -18,7 +19,7 @@ export default function ProductCard({ product }: Props) {
       className='ml-2 bg-sky-500 text-white font-semibold py-2 px-4 rounded hover:bg-sky-600'
       onClick={() => addToCart(product)}
      >
-      Purchase Again
+      Add To Cart
      </button>
     </div>
    </div>

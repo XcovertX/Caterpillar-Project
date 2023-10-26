@@ -6,21 +6,21 @@ import { useRouter } from "next/navigation";
 
 type Props = {
   disabled: boolean
-}
+} 
 
-function CartButton({ disabled }: Props) {
+function HomeButton({ disabled }: Props) {
 const router = useRouter();
 const onClick = () => {
-    router.push('/cart/')
+    router.push('/home/')
 }
 
   return (
     <Button
-      label="Cart"
+      label="Home"
       disabled={disabled}
       onClick={onClick}
     />
   );
 }
 
-export default CartButton;
+export default HomeButton;

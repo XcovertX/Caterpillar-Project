@@ -23,7 +23,7 @@ const CustomerSummary = ({ customer, orders, shippingAddress, billingAddress }: 
                 <div className='p-10 flex flex-row w-full justify-between'>
                     <div className="flex flex-row">
                         <div className='p-2 text-sky-900 flex flex-col font-bold justify-between'>
-                            <h1>Item ID:</h1>
+                            <h1>CustomerID:</h1>
                             <h1>First Name:</h1>
                             <h1>Last Name:</h1>
                             <h1>Customer Since:</h1>

@@ -3,6 +3,7 @@ import current from "../actions/CurrentUser"
 import Header from "../components/Header"
 import AddToCart from "../components/Cart"
 import CartButton from "../components/CartButton"
+import HomeButton from "../components/HomeButton"
 
 export default async function Layout({
     children,
@@ -24,13 +25,15 @@ export default async function Layout({
                     </div>
                 </div>
                 <div className='flex px-2'>
-                    <div className='flex px-2'>
-                        <CartButton />
+                    <div className='flex pr-2'>
+                        <HomeButton disabled={false}/>
                     </div>
                     <div className='flex px-2'>
+                        <CartButton disabled={false}/>
+                    </div>
+                    <div className='flex pl-2'>
                         <Logout />
                     </div>
-                    
                 </div>
                 
             </nav>
