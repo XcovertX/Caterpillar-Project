@@ -1,8 +1,6 @@
 import Logout from "@/app/components/Logout"
 import current from "../actions/CurrentUser"
 import Header from "../components/Header"
-import AddToCart from "../components/Cart"
-import CartButton from "../components/CartButton"
 
 export default async function Layout({
     children,
@@ -23,14 +21,8 @@ export default async function Layout({
                         <h1>{`${currentUser?.user_type}`}</h1>
                     </div>
                 </div>
-                <div className='flex px-2'>
-                    <div className='flex px-2'>
-                        <CartButton />
-                    </div>
-                    <div className='flex px-2'>
-                        <Logout />
-                    </div>
-                    
+                <div className='flex'>
+                    <Logout />
                 </div>
                 
             </nav>
