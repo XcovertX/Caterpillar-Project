@@ -23,7 +23,7 @@ const Button = ({
     <button
       onClick={onClick}
       disabled={disabled}
-      className={`disabled:opacity-70 disabled:cursor-default rounded-full font-semibold hover:bg-sky-500 hover:text-white transition border-2 
+      className={`disabled:opacity-70 disabled:hover:bg-sky-500 disabled:cursor-default rounded-full font-semibold hover:bg-sky-400 hover:text-white transition border-2 
     ${fullWidth ? "w-full" : "w-fit"}
     ${secondary ? "bg-white" : "bg-sky-500"}
     ${secondary ? "text-black" : "text-white"}

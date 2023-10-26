@@ -12,6 +12,7 @@ export default function AddToCartButton({ product }: Props) {
  const addToCart = useCartStore(state => state.addToCart)
 
  return (
+
   <Button
     label="Add To Cart"
     disabled={false}

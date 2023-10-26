@@ -14,7 +14,7 @@ export default async function Layout({
     const currentUser = await current()
     return (
         <section>
-            <nav className="flex flex-row justify-between p-2 bg-black text-white items-center">
+            <nav className="flex flex-row justify-between p-2 bg-black text-white items-center fixed inset-x-0">
                 <div className="flex flex-row" >
                     <div className="flex flex-col pr-2" >
                         <h1>{`${currentUser? 'Signed in:' : ''}`}</h1>
@@ -41,7 +41,7 @@ export default async function Layout({
                 </div>
                 
             </nav>
-            <div className="p-5">
+            <div className="p-5 pt-20">
                 {children}
             </div>
         </section>
