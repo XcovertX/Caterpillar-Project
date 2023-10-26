@@ -16,9 +16,9 @@ const CustomerSummary = ({ customer, orders, shippingAddress, billingAddress }: 
 
     return (
         <div className=''>
-            <div className=' rounded-md bg-zinc-100 shadow-lg items-center w-full flex flex-col'>
+            <div className=' rounded-md bg-zinc-100 shadow-lg items-center w-full flex flex-col text-lg'>
                 <div className='p-5 bg-sky-500 items-center w-full'>
-                    <h1 className="text-2xl text-white text-center ">Customer Summary</h1>
+                    <h1 className="text-2xl text-white font-bold">Customer Summary</h1>
                 </div>
                 <div className='p-10 flex flex-row w-full justify-between'>
                     <div className="flex flex-row">

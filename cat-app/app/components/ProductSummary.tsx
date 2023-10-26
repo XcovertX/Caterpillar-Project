@@ -1,7 +1,6 @@
 'use client'
 import { Product } from "../types/product"
-import Button from "./Button"
-import ProductCard from "./ProductCard"
+import AddToCartButton from "./AddToCartButton"
 
 const ProductSummary = (props: Product) => {
     return (
@@ -9,7 +8,7 @@ const ProductSummary = (props: Product) => {
         
             <div className='bg-white w-full rounded-lg'>
                 <div className='p-5 bg-sky-500 items-center w-full'>
-                    <h1 className="text-2xl text-center ">Product Summary</h1>
+                    <h1 className="text-2xl text-center text-white font-bold ">Product Summary</h1>
                 </div>
                 <div className='p-5 flex flex-row justify-center'>
                     <div className='p-2 text-sky-900 flex flex-col justify-between'>
@@ -25,7 +24,7 @@ const ProductSummary = (props: Product) => {
                 </div>
                 <div className="pb-5 flex justify-center">
                     
-                    <ProductCard product={props}/>
+                    <AddToCartButton product={props}/>
                 </div>
             </div>
             

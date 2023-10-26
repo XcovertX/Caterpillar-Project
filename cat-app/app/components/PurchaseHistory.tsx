@@ -83,7 +83,7 @@ const PurchaseHistory = ({ orders }: Orders_db) => {
 
   return(
     <div className="flex flex-col grow w-full">
-      <h1 className='bg-sky-700 text-white p-2 text-2xl'>
+      <h1 className='bg-sky-700 text-white p-2 text-2xl font-bold'>
         Purchase History
       </h1>
       <table className='bg-sky-500'>
@@ -105,7 +105,7 @@ const PurchaseHistory = ({ orders }: Orders_db) => {
         </thead>
         <tbody>
           {table.getRowModel().rows.map((row, i)=> (
-            <tr key={row.id}  onClick={()=> handleRowClick(row)} className={`${alternateColor(i)} text-sky-700 hover:text-green-500 hover:cursor-pointer`}>
+            <tr key={row.id}  onClick={()=> handleRowClick(row)} className={`${alternateColor(i)} text-sky-700 hover:opacity-60 hover:cursor-pointer`}>
               {row.getVisibleCells().map(cell => (
                 <td key={cell.id} className='p-2'>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}

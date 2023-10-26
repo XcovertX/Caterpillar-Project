@@ -86,7 +86,7 @@ const Inventory = ({ products }: Products_db) => {
        }
     )})
     setData(data);
-    table.setPageSize(100);
+    table.setPageSize(20);
   }, [])
 
   // function for alternating row colors  
@@ -99,7 +99,7 @@ const Inventory = ({ products }: Products_db) => {
 
   return(
     <div className=" flex flex-col ">
-      <div className="flex flex-row justify-between bg-sky-700 p-5 text-2xl text-white items-center">
+      <div className="flex flex-row justify-between bg-sky-700 p-5 text-2xl text-white items-center font-bold">
         <h1 className=''>
           All Products Offered
         </h1>
