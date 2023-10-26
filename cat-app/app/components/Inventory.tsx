@@ -14,7 +14,7 @@ import { Product_db, Product, Products_db } from '../types/product';
         columnHelper.accessor('id', {
         header: 'Product ID'}),
 
-      columnHelper.accessor('productName', {
+      columnHelper.accessor('name', {
           header: 'Item Name',
       }),
       columnHelper.accessor('price', {
@@ -28,10 +28,10 @@ const Inventory = ({ products }: Products_db) => {
     products.map((product: Product_db) => {
     data.push(
         {
-            id:          product.id,
-            productName: product.product_name,
-            price:       product.price,
-            inventoryId: product.inventory_id
+            id:               product.id,
+            name:             product.name,
+            price:            product.price,
+            manufacturedFrom: product.manufactured_from
         }
     )})
 

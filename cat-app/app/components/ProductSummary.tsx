@@ -1,10 +1,13 @@
-
+'use client'
 import { Product } from "../types/product"
+import Button from "./Button"
+import ProductCard from "./ProductCard"
 
 const ProductSummary = (props: Product) => {
     return (
-        <div className='items-center flex flex-col grow w-full'>
-            <div className='bg-white w-full'>
+        <div className='items-center flex flex-col grow w-full shadow-lg '>
+        
+            <div className='bg-white w-full rounded-lg'>
                 <div className='p-5 bg-sky-500 items-center w-full'>
                     <h1 className="text-2xl text-center ">Product Summary</h1>
                 </div>
@@ -16,11 +19,16 @@ const ProductSummary = (props: Product) => {
                     </div>
                     <div className='p-2 text-sky-900 flex flex-col justify-between'>
                         <h1>{props.id.toString()}</h1>
-                        <h1>{props.productName}</h1>
-                        <h1>${props.price}</h1>
+                        <h1>{props.name}</h1>
+                        <h1>$ {props.price.toFixed(2)}</h1>
                     </div>
                 </div>
+                <div className="pb-5 flex justify-center">
+                    
+                    <ProductCard product={props}/>
+                </div>
             </div>
+            
         </div>
     )
 }

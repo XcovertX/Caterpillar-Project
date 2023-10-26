@@ -11,9 +11,9 @@ export default async function Page() {
   const accountType = session?.user?.accountType;
   return (
     <div>
-      {(session && (accountType == 'Admin' || accountType == 'Customer'))? 
+      {(session && (accountType == 'admin' || accountType == 'customer'))? 
       <>
-        {accountType == 'Admin'?
+        {accountType == 'admin'?
           <></>
           : 
           {}

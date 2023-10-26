@@ -1,6 +1,7 @@
 import Logout from "@/app/components/Logout"
 import current from "../actions/CurrentUser"
 import Header from "../components/Header"
+import AddToCart from "../components/Cart"
 
 export default async function Layout({
     children,
@@ -22,6 +23,7 @@ export default async function Layout({
                     </div>
                 </div>
                 <div className='flex'>
+                    <AddToCart />
                     <Logout />
                 </div>
                 

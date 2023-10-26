@@ -8,6 +8,7 @@ import CustomerSummary from "../components/CustomerSummary";
 import { getAddressByAddressId } from "../actions/GetAddress";
 import getSingleCustomerByUserId from "../actions/GetSingleCustomer";
 import { Customer, Customer_db } from "../types/customer";
+import Cart from "../components/Cart";
 
 export default async function Page() {
   const session     = await getServerSession();
@@ -54,6 +55,7 @@ export default async function Page() {
       
       {session? 
       <>
+        
         <CustomerSummary 
           orders={orders} 
           shippingAddress={sAddress} 

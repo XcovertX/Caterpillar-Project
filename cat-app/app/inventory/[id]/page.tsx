@@ -14,10 +14,10 @@ export default async function Page( props: Params ) {
   const res     = await getSingleProductByProductId(props.params.id);
   const product: Product_db  = JSON.parse(res, reviver);
   const productSummary = {
-    id:          product.id,
-    productName: product.product_name,
-    price:       product.price,
-    inventoryId: product.inventory_id 
+    id:               product.id,
+    name:             product.name,
+    price:            product.price,
+    manufacturedFrom: product.manufactured_from 
   }
 
   return (

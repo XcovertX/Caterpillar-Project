@@ -3,27 +3,30 @@ export type Products = {
 }
 
 export type Product = {
-    id:          bigint;
-    productName: string;
-    price:       number;
-    inventoryId: bigint;  
+    id:               bigint;
+    name:             string;
+    price:            number;
+    manufacturedFrom: string
+    quantity?: number 
 }
 
 export type Products_db = {
     products:
     [
         {
-            id:          bigint;
-            product_name: string;
-            price:       number;
-            inventory_id: bigint;
+            id:                bigint;
+            name:              string;
+            price:             number;
+            manufactured_from: string
+            quantity?: number
         }
     ]
 }
 
 export type Product_db = {
-    id:           bigint;
-    product_name: string;
-    price:        number;
-    inventory_id: bigint;
+    id:                bigint;
+    name:              string;
+    price:             number;
+    manufactured_from: string
+    quantity?: number
 }
