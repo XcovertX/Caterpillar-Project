@@ -4,6 +4,7 @@ import Header from "../components/Header"
 import AddToCart from "../components/Cart"
 import CartButton from "../components/CartButton"
 import HomeButton from "../components/HomeButton"
+import ShopButton from "../components/ShopButton"
 
 export default async function Layout({
     children,
@@ -27,6 +28,9 @@ export default async function Layout({
                 <div className='flex px-2'>
                     <div className='flex pr-2'>
                         <HomeButton disabled={false}/>
+                    </div>
+                    <div className='flex px-2'>
+                        <ShopButton disabled={true}/>
                     </div>
                     <div className='flex px-2'>
                         <CartButton disabled={false}/>

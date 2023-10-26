@@ -12,16 +12,19 @@ export default function Cart() {
  }
 
  return (
-  <section>
-   <h3 className='text-2xl font-bold mb-4'>Shopping Cart</h3>
+  <section className="text-lg">
+   <h3 className='text-2xl font-bold mb-4 bg-sky-500 p-5 text-white rounded-lg'>Shopping Cart</h3>
    <ul>
     {cart?.map(product => (
      <CartItem key={product.id} product={product} />
     ))}
    </ul>
-   <div className='flex justify-between items-center mt-4'>
-    <span className='text-lg font-bold'>Total:</span>
-    <span className='text-xl font-bold'>${total.toFixed(2)}</span>
+   <div className='flex bg-sky-500 p-5 text-white justify-between items-center mt-4 rounded-lg'>
+    <span className='text-2xl font-bold'>Total:</span>
+      <div className='flex flex-row justify-between w-24 mr-24' >
+      <h1>$</h1>
+      <h1 className=''>{total.toFixed(2)}</h1>
+    </div>
    </div>
   </section>
  )
