@@ -21,7 +21,7 @@ export default function Cart() {
    </ul>
    <div className='flex bg-sky-500 p-5 text-white justify-between items-center mt-4 rounded-lg'>
     <span className='text-2xl font-bold'>Total:</span>
-      <div className='flex flex-row justify-between w-24 mr-24' >
+      <div className='flex flex-row justify-between w-24 mr-20' >
       <h1>$</h1>
       <h1 className=''>{total.toFixed(2)}</h1>
     </div>

@@ -22,10 +22,6 @@ export default async function Page( props: Params ) {
   const customer: Customer_db  = JSON.parse(res, reviver);
   const ordersRes = await getOrdersByCutomerId(props.params.id);
   const orders: Orders_db  = JSON.parse(ordersRes, reviver);
-  const addressResS = await getAddressByAddressId(customer.contact_information.shipping_address_id);
-  const addressS: Address  = JSON.parse(addressResS, reviver);
-  const addressResB = await getAddressByAddressId(customer.contact_information.billing_address_id);
-  const addressB: Address  = JSON.parse(addressResB, reviver);
   const customerSummary = {
     id:                   customer.id,
     firstName:            customer.first_name,
@@ -39,15 +35,15 @@ export default async function Page( props: Params ) {
       id:                 customer.card_information.id,
       cardNumber:         customer.card_information.card_number,
       cardType:           customer.card_information.card_type,
-    }, 
-    contactInformation: {
-      id:                 customer.contact_information.id,
-      email:              customer.contact_information.email,
-      phone:              customer.contact_information.phone,
-      shippingAddressId:  customer.contact_information.shipping_address_id,
-      billingAddressId:   customer.contact_information.billing_address_id,  
+    },
+    email:                customer.email,
+    phone:                customer.phone,
+    shippingAddress:      customer.address_customer_shipping_address_idToaddress,
+    billingAddress:       (customer.address_customer_billing_address_idToaddress?
+                              customer.address_customer_billing_address_idToaddress : 
+                              customer.address_customer_shipping_address_idToaddress)  
     }
-  }
+
   return (
     <div>
       {session? 
@@ -55,8 +51,7 @@ export default async function Page( props: Params ) {
         <CustomerSummary 
           customer={customerSummary} 
           orders={orders} 
-          billingAddress={addressB} 
-          shippingAddress={addressS}/>
+        />
       </>
       : redirect('/')}
     </div>

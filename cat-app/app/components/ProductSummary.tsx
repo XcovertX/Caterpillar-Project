@@ -1,8 +1,10 @@
 'use client'
+
 import { Product } from "../types/product"
 import AddToCartButton from "./AddToCartButton"
 
 const ProductSummary = (props: Product) => {
+
     return (
         <div className='items-center flex flex-col grow w-full shadow-lg '>
         
@@ -23,7 +25,6 @@ const ProductSummary = (props: Product) => {
                     </div>
                 </div>
                 <div className="pb-5 flex justify-center">
-                    
                     <AddToCartButton product={props}/>
                 </div>
             </div>

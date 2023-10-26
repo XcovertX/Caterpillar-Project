@@ -13,14 +13,14 @@ export type Customer = {
           createdDate:          Date
           userType:             string
           cardInformation: {
-            id:                 bigint,
-            cardNumber:         string,
+            id:                 bigint
+            cardNumber:         string
             cardType:           string
           }, 
-          email:                string,
-          phone:                string,
-          shippingAddressId:    bigint,
-          billingAddressId:     bigint
+          email:                string
+          phone:                string
+          shippingAddress:      Address
+          billingAddress:       Address
         
     }
 

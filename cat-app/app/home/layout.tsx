@@ -25,15 +25,20 @@ export default async function Layout({
                     </div>
                 </div>
                 <div className='flex px-2'>
-                    <div className='flex pr-2'>
-                        <HomeButton disabled={true} />
-                    </div>
-                    <div className='flex px-2'>
-                        <ShopButton disabled={false}/>
-                    </div>
-                    <div className='flex px-2'>
-                        <CartButton disabled={false}/>
-                    </div>
+                {currentUser?.user_type === 'customer'?
+                        <>
+                            <div className='flex pr-2'>
+                                <HomeButton disabled={true} />
+                            </div>
+                            <div className='flex px-2'>
+                                <ShopButton disabled={false}/>
+                            </div>
+                            <div className='flex px-2'>
+                                <CartButton disabled={false}/>
+                            </div>
+                        </> :
+                        <></>
+                    }
                     <div className='flex pl-2'>
                         <Logout />
                     </div>

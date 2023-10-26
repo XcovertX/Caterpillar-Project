@@ -27,6 +27,7 @@ const current = async () => {
             email: session?.user.email
         } 
       });
+      await prisma.$disconnect();
       return currentAdmin;
     }
     if(currentCustomer.user_type === null) {

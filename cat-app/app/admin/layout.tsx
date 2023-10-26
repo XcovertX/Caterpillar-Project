@@ -26,7 +26,7 @@ export default async function Layout({
                 </div>
                 
             </nav>
-            <div className="p-5 m-5 pt-20">
+            <div className="p-5 pt-20">
                 {children}
             </div>
         </section>

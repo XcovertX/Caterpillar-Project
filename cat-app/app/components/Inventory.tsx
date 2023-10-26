@@ -12,10 +12,8 @@ import {
     getPaginationRowModel,
     useReactTable,
   } from '@tanstack/react-table'
-import { useRouter } from 'next/navigation';
 import { Product_db, Product, Products_db } from '../types/product';
-import { ReactComponentElement, ReactNode, useEffect, useState } from 'react';
-import ProductCard from './ProductCard';
+import { ReactNode, useEffect, useState } from 'react';
 import AddToCartButton from './AddToCartButton';
 import ViewItemButton from './ViewItemButton';
 
@@ -55,8 +53,6 @@ type ProductRow = Product & Buttons
 const Inventory = ({ products }: Products_db) => {
   const [data, setData] = useState<ProductRow[]>([])
     
-
-
   const table = useReactTable({
     data,
     columns,

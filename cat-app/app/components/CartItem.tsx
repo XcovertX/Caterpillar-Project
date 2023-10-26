@@ -12,20 +12,24 @@ export default function CartItem({ product }: Props) {
 
  return (
   <li className='bg-white text-lg flex justify-between items-center gap-4  mb-2 shadow-md p-4'>
-    <h1>{product.name}</h1>
+    <div className='flex flex-row justify-between items-center' >
+      <div className='flex flex-row justify-between w-36' >
+        <h1>{product.quantity}</h1>
+        <h1>{product.name}</h1>
+      </div>
+    </div>
     <div className='flex flex-row justify-between items-center' >
     <div className='flex flex-row justify-between w-24' >
       <h1>$</h1>
-
       <h1 className=''>{product.price.toFixed(2)}</h1>
-      </div>
-      <button
+    </div>
+    <button
       title='Remove Item'
       className='text-white hover:bg-red-500 ml-4 p-2 bg-black rounded-full hover:shadow-lg ml-10'
       onClick={() => removeFromCart(product)}
-      >
+    >
       delete
-      </button>
+    </button>
     </div>
 
   </li>
