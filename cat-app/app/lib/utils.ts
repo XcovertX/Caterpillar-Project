@@ -31,7 +31,8 @@ export function replacer(key:any, value:any) {
 
   export function buildTrackingNumber() {
     const rand = Math.random()
-    const num = (rand * 100000000).toString()
+    const num = (Math.round(rand * 1000000000)).toString()
+    console.log("Unq" + num + "US")
     return "Unq" + num + "US"
   }
 

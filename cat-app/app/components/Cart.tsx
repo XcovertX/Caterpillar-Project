@@ -2,8 +2,12 @@
 import { useCartStore } from "./UseCartStore";
 import useFromStore from "../hooks/UseFromStore";
 import CartItem from "./CartItem";
+import SubmitPurchase from "./PurchaseSubmit";
 
-export default function Cart() {
+type Props = {
+  customerId: bigint | undefined
+}
+export default function Cart({ customerId }: Props) {
  const cart = useFromStore(useCartStore, state => state.cart)
 
  let total = 0
@@ -21,9 +25,12 @@ export default function Cart() {
    </ul>
    <div className='flex bg-sky-500 p-5 text-white justify-between items-center mt-4 rounded-lg'>
     <span className='text-2xl font-bold'>Total:</span>
-      <div className='flex flex-row justify-between w-24 mr-20' >
+      <div className='flex flex-row justify-between w-60 items-center' >
+      <div className='flex flex-row justify-between w-24' >
       <h1>$</h1>
       <h1 className=''>{total.toFixed(2)}</h1>
+    </div>
+      <SubmitPurchase items={cart} customer_id={customerId} />
     </div>
    </div>
   </section>

@@ -72,7 +72,6 @@ function Register() {
       useRegisterModal.onClose();
     } catch (error) {
       console.error("Account error: ", error);
-      // Handle the error here, show error message, etc.
     }
   }, [
     useRegisterModal, 

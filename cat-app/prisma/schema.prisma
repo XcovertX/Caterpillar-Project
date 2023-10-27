@@ -24,7 +24,7 @@ model order {
   estimated_delivery_date DateTime @db.Date
   item_quantity           Int
   shipped_from            String   @db.VarChar(255)
-  item_id                 BigInt   @unique
+  item_id                 BigInt
   customer                customer @relation(fields: [customer_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "tempOrder_customer_id_fkey")
   item                    item     @relation(fields: [item_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "tempOrder_item_id_fkey")
 }
@@ -60,7 +60,7 @@ model item {
   price             Float
   manufactured_from String  @db.VarChar(50)
   order_id          BigInt?
-  order             order?
+  order             order[]
 }
 
 model admin {
