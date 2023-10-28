@@ -49,7 +49,6 @@ export default async function Page() {
     }
   }
 
-  console.log("home: ", currentUser, customerSum) 
   return (
     <div>
       
@@ -58,8 +57,6 @@ export default async function Page() {
         
         <CustomerSummary 
           orders={orders} 
-          shippingAddress={sAddress} 
-          billingAddress={bAddress}
           customer={customerSum}/>
         
       </>

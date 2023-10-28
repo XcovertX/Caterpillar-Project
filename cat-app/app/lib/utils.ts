@@ -19,7 +19,7 @@ export function replacer(key:any, value:any) {
     return value;
   }
 
-  // function for formattion dates
+  // function for formating dates
   export function dateFormater(date:Date) {
     const tempDate = new Date(date)
     const day      = tempDate.getDate() + 1;
@@ -29,15 +29,18 @@ export function replacer(key:any, value:any) {
 
   }
 
+  // function for building new tracking numbers
   export function buildTrackingNumber() {
     const rand = Math.random()
     const num = (Math.round(rand * 1000000000)).toString()
-    console.log("Unq" + num + "US")
     return "Unq" + num + "US"
   }
 
+  // function for getting a random date
   export function getRandomDate() {
     const randMonth = Math.floor(Math.random() * 12)
     const randDay = Math.floor(Math.random() * 30)
-    return new Date(randMonth.toString() + "-" + randDay.toString() + "-" +"2024")
+    const date = new Date(randMonth.toString() + "-" + randDay.toString() + "-" +"2024")
+    console.log(date)
+    return date
   }

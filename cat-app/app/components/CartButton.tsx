@@ -1,7 +1,5 @@
 "use client";
-import { useCallback } from "react";
 import Button from "./Button";
-import { redirect } from "next/dist/server/api-utils";
 import { useRouter } from "next/navigation";
 
 type Props = {
